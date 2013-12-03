@@ -43,9 +43,11 @@ public class HelpForm extends Form implements CommandListener {
                    "renseignez les champs et envoyez.\n" +
                    "Un SMS non envoyé est sauvegardé dans <<Envoi form>>.\n" +
                    "En cas de problème, contactez l'ANTIM.";
-        } else if (section.equalsIgnoreCase("epid")) {
-            text = "Renseignez uniquement les cas d'épidémie et de décès pour chaque maladie suivie.\n" +
+        } else if (section.equalsIgnoreCase("version")) {
+            text = "PNLC - Version " + Constants.version + "\n\n" +
                    "En cas de problème, contactez l'ANTIM.";
+        } else if (section.equalsIgnoreCase("Mission")) {
+            text = "Message d'aide pour le formulaire de Mission.";
         } else {
             text = "Aucune aide disponible pour cet élément.";
         }

@@ -17,6 +17,7 @@ public class Configuration {
     private int user_name_index = 2;
     private int district_code_index = 3;
     private int region_code_index = 4;
+    private int operator_type_index = 5;
 
     private static final String database = "configuration";
     private RecordStore recordstore = null;
@@ -30,12 +31,13 @@ public class Configuration {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        if (recordEnumeration.numRecords() < 4) {
+        if (recordEnumeration.numRecords() < 5) {
             // the following has to be in order of indexes.
             this.set("server_number", Constants.server_number, true);
             this.set("user_name", "", true);
             this.set("region_code", "", true);
             this.set("district_code", "", true);
+            this.set("operator_type", "", true);
         }
     }
 
@@ -99,6 +101,8 @@ public class Configuration {
             index = district_code_index;
         } else if (variable.equals("region_code")) {
             index = region_code_index;
+        } else if (variable.equals("operator_type")) {
+            index = operator_type_index;
         } else {
             index = -1;
         }

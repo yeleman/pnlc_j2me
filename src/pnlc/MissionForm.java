@@ -36,8 +36,10 @@ public class MissionForm extends Form implements CommandListener {
     //Mission
     private DateField mission_date;
     private static final String[] startend = {Constants.start, Constants.end};
+    private static final String[] FMA = {"Fixe", "Mobile", "Avancé"};
     private TextField user_pass;
     private ChoiceGroup status_mission;
+    private ChoiceGroup strategy;
 
     Date now = new Date();
     String sep = " ";
@@ -52,11 +54,14 @@ public class MissionForm extends Form implements CommandListener {
         mission_date =  new DateField("Date:", DateField.DATE, TimeZone.getTimeZone("GMT"));
         mission_date.setDate(now);
         //text
-        status_mission = new ChoiceGroup("Début ou fin:", ChoiceGroup.POPUP, startend, null);
         user_pass = new TextField("Mon de passe:", null, 20, TextField.ANY);
+        //choice
+        status_mission = new ChoiceGroup("Début ou fin:", ChoiceGroup.POPUP, startend, null);
+        strategy = new ChoiceGroup("Strategie:", ChoiceGroup.POPUP, FMA, null);
 
         append(mission_date);
         append(status_mission);
+        append(strategy);
         append(user_pass);
 
         addCommand(CMD_EXIT);
@@ -89,22 +94,24 @@ public class MissionForm extends Form implements CommandListener {
 
     public String toSMSFormat() {
 
-        int mission;
+        String mission;
 
-        int reporting_date_array[] = SharedChecks.formatDateString(mission_date.getDate());
-        String reporting_d = String.valueOf(reporting_date_array[2])
-                             + SharedChecks.addzero(reporting_date_array[1])
-                             + SharedChecks.addzero(reporting_date_array[0]);
+        int mission_date_array[] = SharedChecks.formatDateString(mission_date.getDate());
+        String mission_date = String.valueOf(mission_date_array[2])
+                             + SharedChecks.addzero(mission_date_array[1])
+                             + SharedChecks.addzero(mission_date_array[0]);
 
         String user_name = config.get("user_name");
+        String district_code = config.get("district_code");
+        String operator_type = config.get("operator_type");
 
         if (status_mission.getString(status_mission.getSelectedIndex()).equals(Constants.start))
-            mission = 1;
+            mission = "start";
         else
-            mission = 0;
+            mission = "end";
 
-        return "pnlc mission" + sep + user_name + sep + user_pass.getString() + sep + reporting_d
-                            + sep + mission;
+        return "tt" + sep + mission + sep + user_name + sep + user_pass.getString() + sep + district_code
+                    + sep + operator_type + sep + mission_date + sep + strategy.getString(strategy.getSelectedIndex());
     }
 
     public String toText() {

@@ -8,10 +8,7 @@ import pnlc.HelpForm.*;
 import pnlc.Entities.*;
 
 /**
- * J2ME Form allowing Server number, health center and hc_code editing.
- * Saves the new number into <code>Configuration</code>
- * Saves the new health center into <code>Configuration</code>
- * Saves the new hc_code into <code>Configuration</code>
+ * J2ME Form allowing Server number, user_name region and district.
  * @author fadiga
  */
 
@@ -25,10 +22,13 @@ public class OptionForm extends Form implements CommandListener {
     private Configuration config;
     private String[] districts;
 
+    private static final String[] TypeOp = {"AMO","TSO", "OPT"};
     private TextField numberField;
     private TextField user_nameField;
+    //choice
     private ChoiceGroup regionField;
     private ChoiceGroup districtField;
+    private ChoiceGroup operator_typeField;
     private String ErrorMessage = "";
 
     PNLCMIDlet midlet;
@@ -38,7 +38,6 @@ public OptionForm(PNLCMIDlet midlet) {
     this.midlet = midlet;
 
     config = new Configuration();
-    // districts = Constants.codes_district();
     districts = Entities.cercles_codes();
 
     // retrieve phone number from config
@@ -52,7 +51,16 @@ public OptionForm(PNLCMIDlet midlet) {
     numberField = new TextField ("Numéro du serveur:", phone_number, 8, TextField.PHONENUMBER);
     user_nameField = new TextField("Nom d'utilisation", config.get("user_name"), 20, TextField.ANY);
     regionField = new ChoiceGroup("Région", ChoiceGroup.POPUP, Entities.cercles_names(), null);
+    operator_typeField = new ChoiceGroup("Type d'opérateur", ChoiceGroup.POPUP, TypeOp, null);
 
+    int op_index = 0;
+    String my_type_op = config.get("operator_type");
+    for (int i = 0; i<TypeOp.length ; i++) {
+        if (TypeOp[i].equals(my_type_op)) {
+            op_index = i;
+            break;
+        }
+    }
     int dis_index = 0;
     String my_dis = config.get("district_code");
     for (int i=0; i<districts.length;i++) {
@@ -62,18 +70,18 @@ public OptionForm(PNLCMIDlet midlet) {
         }
     }
 
-    // profileField.setSelectedIndex(sel, true);
+    operator_typeField.setSelectedIndex(op_index, true);
     regionField.setSelectedIndex(dis_index, true);
 
-    System.out.println("Option From");
     append(numberField);
     append(regionField);
+    append(operator_typeField);
     append(user_nameField);
 
     addCommand(CMD_CONTINUE);
     addCommand(CMD_EXIT);
     addCommand(CMD_HELP);
-    this.setCommandListener (this);
+    this.setCommandListener(this);
   }
 
     /*
@@ -113,7 +121,8 @@ public OptionForm(PNLCMIDlet midlet) {
         }
 
         if (c == CMD_CONTINUE) {
-            districtField = new ChoiceGroup("Districts", ChoiceGroup.POPUP, Entities.communes_names(districts[regionField.getSelectedIndex()]), null);
+            districtField = new ChoiceGroup("Districts", ChoiceGroup.POPUP,
+                                            Entities.communes_names(districts[regionField.getSelectedIndex()]), null);
 
             append(districtField);
             removeCommand(CMD_CONTINUE);
@@ -148,6 +157,7 @@ public OptionForm(PNLCMIDlet midlet) {
             if (config.set("server_number", numberField.getString()) &&
                     config.set("user_name", user_nameField.getString()) &&
                     config.set("region_code", region_code) &&
+                    config.set("operator_type", operator_typeField.getString(operator_typeField.getSelectedIndex())) &&
                     config.set("district_code", district_code)) {
 
                 alert = new Alert ("Confirmation!", "Votre modification a bien été enregistrée.", null, AlertType.CONFIRMATION);
