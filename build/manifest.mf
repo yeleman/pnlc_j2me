@@ -1,7 +1,7 @@
-MIDlet-1: Midletplnc, , pnlc.Midletplnc
+MIDlet-1: PNLCMidlet,/eye.png,pnlc.PNLCMIDlet
 MIDlet-Vendor: yɛlɛman s.à.r.l
 MIDlet-Name: PNLC
-MIDlet-Icon: 
+MIDlet-Icon: eye.png
 MIDlet-Install-Notify: Merci d'avoir installer le PNLC
 MIDlet-Description: Outil de collecte du Programme Nationnal de lutte contre la Cécité
 MIDlet-Version: 1.0
