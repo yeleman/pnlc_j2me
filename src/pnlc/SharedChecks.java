@@ -119,7 +119,7 @@ public class SharedChecks {
         }
     }
 
-        public static boolean compareDobDod(Date dob, Date dod) {
+        public static boolean compareleftarrived(Date dob, Date dod) {
         // all fields are required to be filled.
         int array[] = formatDateString(dob);
         int dob_day = array[0];
@@ -135,15 +135,6 @@ public class SharedChecks {
             return true;
         else
             return false;
-    }
-
-    public static boolean ValidateCode(String code) {
-        if (code.length() >= 3 && code.indexOf(" ") == -1) {
-            return false;
-        }
-        else {
-            return true;
-        }
     }
 
     public static String addzero(int num){

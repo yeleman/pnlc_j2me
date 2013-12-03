@@ -9,7 +9,7 @@ import pnlc.Entities.*;
 
 /**
  * J2ME Form allowing Server number, user_name region and district.
- * @author fadiga
+ * @author Fad
  */
 
 public class OptionForm extends Form implements CommandListener {

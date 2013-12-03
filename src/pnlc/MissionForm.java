@@ -1,4 +1,3 @@
-
 package pnlc;
 
 import javax.microedition.lcdui.*;
@@ -34,10 +33,10 @@ public class MissionForm extends Form implements CommandListener {
     private SMSStore store;
 
     //Mission
-    private DateField mission_date;
+    private DateField arrived_or_left_on;
     private static final String[] startend = {Constants.start, Constants.end};
-    private static final String[] FMA = {"Fixe", "Mobile", "Avancé"};
-    private TextField user_pass;
+    private static final String[] FMA = {Constants.FIXED, Constants.MOBILE, Constants.ADVANCED};
+    private TextField user_password;
     private ChoiceGroup status_mission;
     private ChoiceGroup strategy;
 
@@ -51,18 +50,18 @@ public class MissionForm extends Form implements CommandListener {
         config = new Configuration();
         store = new SMSStore();
         //date
-        mission_date =  new DateField("Date:", DateField.DATE, TimeZone.getTimeZone("GMT"));
-        mission_date.setDate(now);
+        arrived_or_left_on =  new DateField("Date:", DateField.DATE, TimeZone.getTimeZone("GMT"));
+        arrived_or_left_on.setDate(now);
         //text
-        user_pass = new TextField("Mon de passe:", null, 20, TextField.ANY);
+        user_password = new TextField("Mon de passe:", null, 20, TextField.ANY);
         //choice
         status_mission = new ChoiceGroup("Début ou fin:", ChoiceGroup.POPUP, startend, null);
         strategy = new ChoiceGroup("Strategie:", ChoiceGroup.POPUP, FMA, null);
 
-        append(mission_date);
+        append(arrived_or_left_on);
         append(status_mission);
         append(strategy);
-        append(user_pass);
+        append(user_password);
 
         addCommand(CMD_EXIT);
         addCommand(CMD_SEND);
@@ -74,18 +73,16 @@ public class MissionForm extends Form implements CommandListener {
     public boolean isComplete() {
 
         // all fields are required to be filled.
-        if (user_pass.getString().length() == 0) {
+        if (user_password.getString().length() == 0) {
             return false;
         }
         return true;
     }
 
     public boolean isValid() {
-        //TODO: Si c'est Autre qui est choisi comme lieu de naissance le change précision devient obligatoire.
-        //      la date de naissance ne doit pas être superière à la date d'enregistrement.
         ErrorMessage = "La date indiquée est dans le futur.";
 
-        if (SharedChecks.isDateValide(mission_date.getDate()) != true) {
+        if (SharedChecks.isDateValide(arrived_or_left_on.getDate()) != true) {
             ErrorMessage = "[Date] " + ErrorMessage;
             return false;
         }
@@ -95,11 +92,12 @@ public class MissionForm extends Form implements CommandListener {
     public String toSMSFormat() {
 
         String mission;
+        String type_strategy = null;
 
-        int mission_date_array[] = SharedChecks.formatDateString(mission_date.getDate());
-        String mission_date = String.valueOf(mission_date_array[2])
-                             + SharedChecks.addzero(mission_date_array[1])
-                             + SharedChecks.addzero(mission_date_array[0]);
+        int arrived_or_left_on_array[] = SharedChecks.formatDateString(arrived_or_left_on.getDate());
+        String arrived_or_left_on = String.valueOf(arrived_or_left_on_array[2])
+                             + SharedChecks.addzero(arrived_or_left_on_array[1])
+                             + SharedChecks.addzero(arrived_or_left_on_array[0]);
 
         String user_name = config.get("user_name");
         String district_code = config.get("district_code");
@@ -110,14 +108,21 @@ public class MissionForm extends Form implements CommandListener {
         else
             mission = "end";
 
-        return "tt" + sep + mission + sep + user_name + sep + user_pass.getString() + sep + district_code
-                    + sep + operator_type + sep + mission_date + sep + strategy.getString(strategy.getSelectedIndex());
+        if (strategy.getString(strategy.getSelectedIndex()).equals(Constants.FIXED))
+            type_strategy = "fixed";
+        if (strategy.getString(strategy.getSelectedIndex()).equals(Constants.MOBILE))
+            type_strategy = "mobile";
+        if (strategy.getString(strategy.getSelectedIndex()).equals(Constants.ADVANCED))
+            type_strategy = "advanced";
+
+        return "tt" + sep + mission + sep + user_name + sep + user_password.getString() + sep + district_code
+                    + sep + operator_type + sep + arrived_or_left_on + sep + type_strategy;
     }
 
     public String toText() {
-        int mission_array[] = SharedChecks.formatDateString(mission_date.getDate());
+        int mission_array[] = SharedChecks.formatDateString(arrived_or_left_on.getDate());
 
-        return "N-" + mission_array[0] + "] " + status_mission.getSelectedIndex();
+        return "N-" + mission_array[0] + "] " + status_mission.getString(status_mission.getSelectedIndex());
     }
 
     public void commandAction(Command c, Displayable d) {

@@ -1,4 +1,4 @@
-package pnlc;
+ package pnlc;
 
 /**
  * Static constant holder
@@ -14,5 +14,8 @@ public class Constants {
     public static final String NON = "Non";
     public static final String start = "Début";
     public static final String end = "Fin";
+    public static final String FIXED = "Fixe";
+    public static final String MOBILE = "Mobile";
+    public static final String ADVANCED = "Avancé";
 
 }

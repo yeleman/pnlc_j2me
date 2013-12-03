@@ -14,6 +14,8 @@ import pnlc.OptionForm.*;
 import pnlc.Constants.*;
 import pnlc.Configuration.*;
 import pnlc.MissionForm.*;
+import pnlc.VisitVillageForm.*;
+import pnlc.SendSavedReports.*;
 
 
 /**
@@ -39,7 +41,7 @@ public class PNLCMIDlet extends MIDlet implements CommandListener {
         SMSStore store = new SMSStore();
 
         String[] mainMenu_ = {"Mission", "Formulaire TT",
-                             "Envoi form. (" + store.count() + ")"};
+                              "Renvoi form. (" + store.count() + ")"};
 
         if(config.get("user_name").equals("")){
             OptionForm f = new OptionForm(this);
@@ -71,11 +73,20 @@ public class PNLCMIDlet extends MIDlet implements CommandListener {
             if (c == List.SELECT_COMMAND) {
 
                 switch (((List) s).getSelectedIndex ()) {
-                // submit stored messages
-                                // Form under5
+                // Mark the beginning or end of a mission
                 case 0:
                     MissionForm mission_form = new MissionForm(this);
                     display.setCurrent (mission_form);
+                    break;
+                // End of the visit of a village
+                case 1:
+                    VisitVillageForm visit_village_form = new VisitVillageForm(this);
+                    display.setCurrent (visit_village_form);
+                    break;
+                // submit stored messages
+                case 2:
+                    SendSavedReports saved_reports = new SendSavedReports(this);
+                    display.setCurrent (saved_reports);
                     break;
                 }
             }

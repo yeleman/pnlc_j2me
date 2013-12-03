@@ -1,4 +1,3 @@
-
 package pnlc;
 
 import javax.microedition.rms.*;
@@ -18,6 +17,7 @@ public class Configuration {
     private int district_code_index = 3;
     private int region_code_index = 4;
     private int operator_type_index = 5;
+    private int old_center_health_index = 6;
 
     private static final String database = "configuration";
     private RecordStore recordstore = null;
@@ -33,11 +33,13 @@ public class Configuration {
         }
         if (recordEnumeration.numRecords() < 5) {
             // the following has to be in order of indexes.
+            // Todo change les valeurs par defaut pour
             this.set("server_number", Constants.server_number, true);
-            this.set("user_name", "", true);
-            this.set("region_code", "", true);
-            this.set("district_code", "", true);
-            this.set("operator_type", "", true);
+            this.set("user_name", "fadiga", true);
+            this.set("region_code", "r", true);
+            this.set("district_code", "d", true);
+            this.set("operator_type", "o", true);
+            this.set("old_center_health", "0", true);
         }
     }
 
@@ -103,6 +105,8 @@ public class Configuration {
             index = region_code_index;
         } else if (variable.equals("operator_type")) {
             index = operator_type_index;
+        } else if (variable.equals("old_center_health")) {
+            index = old_center_health_index;
         } else {
             index = -1;
         }
