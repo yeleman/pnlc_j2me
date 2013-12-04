@@ -5,7 +5,7 @@ import javax.microedition.lcdui.*;
 import pnlc.Configuration.*;
 import pnlc.Constants.*;
 import pnlc.HelpForm.*;
-import pnlc.Entities.*;
+import snisi.entities.Utils.*;
 
 /**
  * J2ME Form allowing Server number, user_name region and district.
@@ -20,7 +20,7 @@ public class OptionForm extends Form implements CommandListener {
     private static final Command CMD_CONTINUE = new Command ("Continuer", Command.HELP, 2);
 
     private Configuration config;
-    private String[] districts;
+    private String[] regions;
 
     private static final String[] TypeOp = {"AMO","TSO", "OPT"};
     private TextField numberField;
@@ -38,7 +38,7 @@ public OptionForm(PNLCMIDlet midlet) {
     this.midlet = midlet;
 
     config = new Configuration();
-    districts = Entities.cercles_codes();
+    regions = snisi.entities.Utils.regions_codes();
 
     // retrieve phone number from config
     // if not present, use constant
@@ -50,7 +50,7 @@ public OptionForm(PNLCMIDlet midlet) {
 
     numberField = new TextField ("Numéro du serveur:", phone_number, 8, TextField.PHONENUMBER);
     user_nameField = new TextField("Votre Identifiant", config.get("user_name"), 20, TextField.ANY);
-    regionField = new ChoiceGroup("Votre Région", ChoiceGroup.POPUP, Entities.cercles_names(), null);
+    regionField = new ChoiceGroup("Votre Région", ChoiceGroup.POPUP, snisi.entities.Utils.regions_names(), null);
     operator_typeField = new ChoiceGroup("Votre Profil", ChoiceGroup.POPUP, TypeOp, null);
 
     int op_index = 0;
@@ -63,8 +63,8 @@ public OptionForm(PNLCMIDlet midlet) {
     }
     int dis_index = 0;
     String my_dis = config.get("district_code");
-    for (int i=0; i<districts.length;i++) {
-        if (districts[i].equals(my_dis)) {
+    for (int i=0; i<regions.length;i++) {
+        if (regions[i].equals(my_dis)) {
             dis_index = i;
             break;
         }
@@ -110,7 +110,7 @@ public OptionForm(PNLCMIDlet midlet) {
 
     public void commandAction(Command c, Displayable d) {
         // Help command displays Help Form
-         if (c == CMD_HELP) {
+        if (c == CMD_HELP) {
             HelpForm h = new HelpForm(this.midlet, this, "option");
             this.midlet.display.setCurrent(h);
         }
@@ -122,7 +122,7 @@ public OptionForm(PNLCMIDlet midlet) {
 
         if (c == CMD_CONTINUE) {
             districtField = new ChoiceGroup("Votre District", ChoiceGroup.POPUP,
-                                            Entities.communes_names(districts[regionField.getSelectedIndex()]), null);
+                                            snisi.entities.Utils.districts_names(regions[regionField.getSelectedIndex()]), null);
 
             append(districtField);
             removeCommand(CMD_CONTINUE);
@@ -151,8 +151,8 @@ public OptionForm(PNLCMIDlet midlet) {
             }
 
 
-            String region_code = districts[regionField.getSelectedIndex()];
-            String district_code = Entities.communes_codes(region_code)[districtField.getSelectedIndex()];
+            String region_code = regions[regionField.getSelectedIndex()];
+            String district_code = snisi.entities.Utils.districts_codes(region_code)[districtField.getSelectedIndex()];
 
             if (config.set("server_number", numberField.getString()) &&
                     config.set("user_name", user_nameField.getString()) &&

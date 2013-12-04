@@ -4,7 +4,6 @@ import javax.microedition.lcdui.*;
 import java.util.TimeZone;
 import pnlc.Configuration.*;
 import pnlc.Constants.*;
-import pnlc.Entities.*;
 import pnlc.SharedChecks.*;
 import java.util.Date;
 

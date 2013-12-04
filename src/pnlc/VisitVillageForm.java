@@ -5,7 +5,7 @@ import javax.microedition.lcdui.*;
 import java.util.TimeZone;
 import pnlc.Configuration.*;
 import pnlc.Constants.*;
-import pnlc.Entities.*;
+import snisi.entities.Utils.*;
 import pnlc.SharedChecks.*;
 import java.util.Date;
 
@@ -50,12 +50,18 @@ public class VisitVillageForm extends Form implements CommandListener {
     private DateField arrived_on;
     private DateField left_on;
     private ChoiceGroup locationField;
-    private ChoiceGroup center_healthField;
+    private ChoiceGroup health_centerField;
 
     Date now = new Date();
     String sep = " ";
     String female = " Femmes:";
     String male = " Hommes:";
+    // proxy from config
+    String region_code;
+    String district_code;
+    String last_health_center;
+    String health_center_code;
+    String village_code;
 
     public VisitVillageForm(PNLCMIDlet midlet) {
         super("Visite village");
@@ -64,11 +70,9 @@ public class VisitVillageForm extends Form implements CommandListener {
         config = new Configuration();
         store = new SMSStore();
 
-        String district_code = config.get("district_code");
-        String old_center_health = config.get("center_health");
-
-        System.out.print("old_center_health");
-        System.out.print(old_center_health);
+        region_code = config.get("region_code");
+        district_code = config.get("district_code");
+        last_health_center = config.get("last_health_center");
 
         //Text
         user_password = new TextField("Mot de passe:", null, 20, TextField.ANY);
@@ -86,13 +90,15 @@ public class VisitVillageForm extends Form implements CommandListener {
         arrived_on.setDate(now);
         left_on =  new DateField(" départ:", DateField.DATE, TimeZone.getTimeZone("GMT"));
         left_on.setDate(now);
-        center_healthField = new ChoiceGroup("Aire de santé:", ChoiceGroup.POPUP, Entities.villages_names(district_code), null);
-        // center_healthField.setSelectedIndex(Integer.parseInt(old_center_health), true);
+        health_centerField = new ChoiceGroup("Aire de santé:",
+                                             ChoiceGroup.POPUP,
+                                             snisi.entities.Utils.hcenters_names(region_code, district_code), null);
+        // health_centerField.setSelectedIndex(Integer.parseInt(last_health_center), true);
 
         //choice
         commutity_assistance = new ChoiceGroup("Aide du relais:", ChoiceGroup.POPUP, YesNon, null);
 
-        append(center_healthField);
+        append(health_centerField);
 
 
         addCommand(CMD_CONTINUE);
@@ -151,13 +157,15 @@ public class VisitVillageForm extends Form implements CommandListener {
             relay = 0;
 
         String user_name = config.get("user_name");
-        String center_healthField_index = String.valueOf(center_healthField.getSelectedIndex());
 
         // On sauvegarde l'index du centre de santé pour l'ulitiser par defaut après
-        config.set("center_health", center_healthField_index);
+        config.set("last_health_center", health_center_code);
+
+        // village location
+        village_code = snisi.entities.Utils.villages_codes(region_code, district_code, health_center_code)[locationField.getSelectedIndex()];
 
         return "tt visit" + sep + user_name + sep + user_password.getString()
-                          + sep + "location"
+                          + sep + village_code
                           + sep + consultation_male.getString()
                           + sep + consultation_female.getString()
                           + sep + surgery_male.getString()
@@ -189,9 +197,13 @@ public class VisitVillageForm extends Form implements CommandListener {
         }
 
         if (c == CMD_CONTINUE) {
-            // A modifier car c'est en static
-            locationField = new ChoiceGroup("Village:", ChoiceGroup.POPUP, Entities.villages_names("m199_ht"), null);
-            // locationField = new ChoiceGroup("Code village (visite):", ChoiceGroup.POPUP, Entities.villages_names(center_health_code), null);
+            health_center_code = snisi.entities.Utils.hcenters_codes(region_code, district_code)[health_centerField.getSelectedIndex()];
+            locationField = new ChoiceGroup("Village:",
+                                            ChoiceGroup.POPUP,
+                                            snisi.entities.Utils.villages_names(region_code,
+                                                                    district_code,
+                                                                    health_center_code), null);
+            // locationField = new ChoiceGroup("Code village (visite):", ChoiceGroup.POPUP, snisi.entities.Utils.villages_names(health_center_code), null);
 
             append(locationField);
             append("Nb consultés");

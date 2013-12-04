@@ -17,7 +17,7 @@ public class Configuration {
     private int district_code_index = 3;
     private int region_code_index = 4;
     private int operator_type_index = 5;
-    private int old_center_health_index = 6;
+    private int last_health_center_index = 6;
 
     private static final String database = "configuration";
     private RecordStore recordstore = null;
@@ -39,7 +39,7 @@ public class Configuration {
             this.set("region_code", "", true);
             this.set("district_code", "", true);
             this.set("operator_type", "", true);
-            this.set("center_health", "0", true);
+            this.set("last_health_center", "0", true);
         }
     }
 
@@ -105,8 +105,8 @@ public class Configuration {
             index = region_code_index;
         } else if (variable.equals("operator_type")) {
             index = operator_type_index;
-        } else if (variable.equals("old_center_health")) {
-            index = old_center_health_index;
+        } else if (variable.equals("last_health_center")) {
+            index = last_health_center_index;
         } else {
             index = -1;
         }
