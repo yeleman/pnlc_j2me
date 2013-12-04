@@ -9,13 +9,17 @@ public class Constants {
 
     public static final String version = "0.1b";
 
-    public static final String server_number = "70000000";
+    public static final String server_number = "70062552";
     public static final String OUI = "Oui";
     public static final String NON = "Non";
-    public static final String start = "Début";
-    public static final String end = "Fin";
+    public static final String START = "Début";
+    public static final String END = "Fin";
     public static final String FIXED = "Fixe";
     public static final String MOBILE = "Mobile";
     public static final String ADVANCED = "Avancé";
+    public static final int username_min_length = 4;
+    public static final int password_min_length = 3;
+    public static final int username_max_length = 8;
+    public static final int password_max_length = 8;
 
 }

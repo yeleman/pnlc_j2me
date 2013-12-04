@@ -18,12 +18,9 @@ import java.util.Date;
 
 public class MissionForm extends Form implements CommandListener {
 
-    private static final Command CMD_EXIT = new Command ("Retour",
-                                                            Command.BACK, 1);
-    private static final Command CMD_SEND = new Command ("Envoi.",
-                                                            Command.OK, 1);
-    private static final Command CMD_HELP = new Command ("Aide",
-                                                            Command.HELP, 2);
+    private static final Command CMD_EXIT = new Command ("Retour", Command.BACK, 1);
+    private static final Command CMD_SEND = new Command ("Envoi.", Command.OK, 1);
+    private static final Command CMD_HELP = new Command ("Aide", Command.HELP, 2);
 
     PNLCMIDlet midlet;
     Displayable returnTo;
@@ -34,8 +31,8 @@ public class MissionForm extends Form implements CommandListener {
 
     //Mission
     private DateField arrived_or_left_on;
-    private static final String[] startend = {Constants.start, Constants.end};
-    private static final String[] FMA = {Constants.FIXED, Constants.MOBILE, Constants.ADVANCED};
+    private static final String[] startend = {Constants.START, Constants.END};
+    private static final String[] FMA = {Constants.MOBILE, Constants.ADVANCED, Constants.FIXED};
     private TextField user_password;
     private ChoiceGroup status_mission;
     private ChoiceGroup strategy;
@@ -53,7 +50,7 @@ public class MissionForm extends Form implements CommandListener {
         arrived_or_left_on =  new DateField("Date:", DateField.DATE, TimeZone.getTimeZone("GMT"));
         arrived_or_left_on.setDate(now);
         //text
-        user_password = new TextField("Mon de passe:", null, 20, TextField.ANY);
+        user_password = new TextField("Mot de passe:", null, 20, TextField.ANY);
         //choice
         status_mission = new ChoiceGroup("Début ou fin:", ChoiceGroup.POPUP, startend, null);
         strategy = new ChoiceGroup("Strategie:", ChoiceGroup.POPUP, FMA, null);
@@ -103,7 +100,7 @@ public class MissionForm extends Form implements CommandListener {
         String district_code = config.get("district_code");
         String operator_type = config.get("operator_type");
 
-        if (status_mission.getString(status_mission.getSelectedIndex()).equals(Constants.start))
+        if (status_mission.getString(status_mission.getSelectedIndex()).equals(Constants.START))
             mission = "start";
         else
             mission = "end";

@@ -49,9 +49,9 @@ public OptionForm(PNLCMIDlet midlet) {
     }
 
     numberField = new TextField ("Numéro du serveur:", phone_number, 8, TextField.PHONENUMBER);
-    user_nameField = new TextField("Nom d'utilisation", config.get("user_name"), 20, TextField.ANY);
-    regionField = new ChoiceGroup("Région", ChoiceGroup.POPUP, Entities.cercles_names(), null);
-    operator_typeField = new ChoiceGroup("Type d'opérateur", ChoiceGroup.POPUP, TypeOp, null);
+    user_nameField = new TextField("Votre Identifiant", config.get("user_name"), 20, TextField.ANY);
+    regionField = new ChoiceGroup("Votre Région", ChoiceGroup.POPUP, Entities.cercles_names(), null);
+    operator_typeField = new ChoiceGroup("Votre Profil", ChoiceGroup.POPUP, TypeOp, null);
 
     int op_index = 0;
     String my_type_op = config.get("operator_type");
@@ -74,9 +74,9 @@ public OptionForm(PNLCMIDlet midlet) {
     regionField.setSelectedIndex(dis_index, true);
 
     append(numberField);
-    append(regionField);
-    append(operator_typeField);
     append(user_nameField);
+    append(operator_typeField);
+    append(regionField);
 
     addCommand(CMD_CONTINUE);
     addCommand(CMD_EXIT);
@@ -102,7 +102,7 @@ public OptionForm(PNLCMIDlet midlet) {
 
     public boolean isValid() {
         if (numberField.getString().length() < 8) {
-            ErrorMessage = "[Numéro du serveur] n'est pas un numéro n'est pas valide";
+            ErrorMessage = "[Numéro du serveur] n'est pas un numéro valide";
             return false;
         }
         return true;
@@ -121,7 +121,7 @@ public OptionForm(PNLCMIDlet midlet) {
         }
 
         if (c == CMD_CONTINUE) {
-            districtField = new ChoiceGroup("Districts", ChoiceGroup.POPUP,
+            districtField = new ChoiceGroup("Votre District", ChoiceGroup.POPUP,
                                             Entities.communes_names(districts[regionField.getSelectedIndex()]), null);
 
             append(districtField);

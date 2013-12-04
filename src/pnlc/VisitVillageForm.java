@@ -54,8 +54,8 @@ public class VisitVillageForm extends Form implements CommandListener {
 
     Date now = new Date();
     String sep = " ";
-    String female = " F:";
-    String male = " M:";
+    String female = " Femmes:";
+    String male = " Hommes:";
 
     public VisitVillageForm(PNLCMIDlet midlet) {
         super("Visite village");
@@ -67,8 +67,11 @@ public class VisitVillageForm extends Form implements CommandListener {
         String district_code = config.get("district_code");
         String old_center_health = config.get("center_health");
 
+        System.out.print("old_center_health");
+        System.out.print(old_center_health);
+
         //Text
-        user_password = new TextField("Mon de passe:", null, 20, TextField.ANY);
+        user_password = new TextField("Mot de passe:", null, 20, TextField.ANY);
         consultation_male = new TextField(male, null, MAX_SIZE, TextField.DECIMAL);
         consultation_female = new TextField(female, null, MAX_SIZE, TextField.DECIMAL);
         surgery_male = new TextField(male, null, MAX_SIZE, TextField.DECIMAL);
@@ -79,34 +82,18 @@ public class VisitVillageForm extends Form implements CommandListener {
         recidivism_female = new TextField(female, null, MAX_SIZE, TextField.DECIMAL);
 
         //date
-        arrived_on =  new DateField(" d'arrivée:", DateField.DATE, TimeZone.getTimeZone("GMT"));
+        arrived_on =  new DateField(" arrivée:", DateField.DATE, TimeZone.getTimeZone("GMT"));
         arrived_on.setDate(now);
         left_on =  new DateField(" départ:", DateField.DATE, TimeZone.getTimeZone("GMT"));
         left_on.setDate(now);
-        center_healthField = new ChoiceGroup("Centre de santé:", ChoiceGroup.POPUP, Entities.villages_names(district_code), null);
+        center_healthField = new ChoiceGroup("Aire de santé:", ChoiceGroup.POPUP, Entities.villages_names(district_code), null);
         // center_healthField.setSelectedIndex(Integer.parseInt(old_center_health), true);
 
         //choice
-        commutity_assistance = new ChoiceGroup("Rélais:", ChoiceGroup.POPUP, YesNon, null);
+        commutity_assistance = new ChoiceGroup("Aide du relais:", ChoiceGroup.POPUP, YesNon, null);
 
-        append("Consultés");
-        append(consultation_male);
-        append(consultation_female);
-        append("Opérés");
-        append(surgery_male);
-        append(surgery_female);
-        append("Réfus");
-        append(refusal_male);
-        append(refusal_female);
-        append("Recidive");
-        append(recidivism_male);
-        append(recidivism_female);
-        append(commutity_assistance);
-        append("Date");
-        append(arrived_on);
-        append(left_on);
         append(center_healthField);
-        append(user_password);
+
 
         addCommand(CMD_CONTINUE);
         addCommand(CMD_EXIT);
@@ -128,16 +115,16 @@ public class VisitVillageForm extends Form implements CommandListener {
         ErrorMessage = "La date indiquée est dans le futur.";
 
         if (SharedChecks.isDateValide(arrived_on.getDate()) != true) {
-            ErrorMessage = "[Date de visite] " + ErrorMessage;
+            ErrorMessage = "[Date d'arrivée] " + ErrorMessage;
             return false;
         }
 
         if (SharedChecks.isDateValide(left_on.getDate()) != true) {
-            ErrorMessage = "[Date de naissance] " + ErrorMessage;
+            ErrorMessage = "[Date de départ] " + ErrorMessage;
             return false;
         }
-        if (SharedChecks.compareleftarrived(left_on.getDate(), arrived_on.getDate()) == true) {
-            ErrorMessage = "[Erreur] la date de début ne peut pas être inferieure à la date de fin.";
+        if (SharedChecks.compareleftarrived(arrived_on.getDate(), left_on.getDate()) == true) {
+            ErrorMessage = "[Erreur] la date de départ ne peut pas être antérieure à la date d'arrivée.";
             return false;
         }
 
@@ -192,7 +179,7 @@ public class VisitVillageForm extends Form implements CommandListener {
     public void commandAction(Command c, Displayable d) {
         // help command displays Help Form.
         if (c == CMD_HELP) {
-            HelpForm h = new HelpForm(this.midlet, this, "born");
+            HelpForm h = new HelpForm(this.midlet, this, "Visite village");
             this.midlet.display.setCurrent(h);
         }
 
@@ -203,10 +190,27 @@ public class VisitVillageForm extends Form implements CommandListener {
 
         if (c == CMD_CONTINUE) {
             // A modifier car c'est en static
-            locationField = new ChoiceGroup("Code village (visite):", ChoiceGroup.POPUP, Entities.villages_names("m199_ht"), null);
+            locationField = new ChoiceGroup("Village:", ChoiceGroup.POPUP, Entities.villages_names("m199_ht"), null);
             // locationField = new ChoiceGroup("Code village (visite):", ChoiceGroup.POPUP, Entities.villages_names(center_health_code), null);
 
             append(locationField);
+            append("Nb consultés");
+            append(consultation_male);
+            append(consultation_female);
+            append("Nb opérés");
+            append(surgery_male);
+            append(surgery_female);
+            append("Nb refus");
+            append(refusal_male);
+            append(refusal_female);
+            append("Nb récidives");
+            append(recidivism_male);
+            append(recidivism_female);
+            append(commutity_assistance);
+            append("Dates :");
+            append(arrived_on);
+            append(left_on);
+            append(user_password);
             removeCommand(CMD_CONTINUE);
             addCommand(CMD_SEND);
         }

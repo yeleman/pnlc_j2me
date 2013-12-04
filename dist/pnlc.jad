@@ -2,7 +2,7 @@ MIDlet-1: PNLCMidlet,/eye.png,pnlc.PNLCMIDlet
 MIDlet-Description: Outil de collecte du Programme Nationnal de lutte contre la Cécité
 MIDlet-Icon: eye.png
 MIDlet-Install-Notify: Merci d'avoir installer le PNLC
-MIDlet-Jar-Size: 46784
+MIDlet-Jar-Size: 49045
 MIDlet-Jar-URL: pnlc.jar
 MIDlet-Name: PNLC
 MIDlet-Vendor: yɛlɛman s.à.r.l

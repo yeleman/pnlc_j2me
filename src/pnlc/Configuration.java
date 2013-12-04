@@ -35,11 +35,11 @@ public class Configuration {
             // the following has to be in order of indexes.
             // Todo change les valeurs par defaut pour
             this.set("server_number", Constants.server_number, true);
-            this.set("user_name", "fadiga", true);
-            this.set("region_code", "r", true);
-            this.set("district_code", "d", true);
-            this.set("operator_type", "o", true);
-            this.set("old_center_health", "0", true);
+            this.set("user_name", "", true);
+            this.set("region_code", "", true);
+            this.set("district_code", "", true);
+            this.set("operator_type", "", true);
+            this.set("center_health", "0", true);
         }
     }
 
