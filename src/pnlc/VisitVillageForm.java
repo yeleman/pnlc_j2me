@@ -1,4 +1,3 @@
-
 package pnlc;
 
 import javax.microedition.lcdui.*;
@@ -15,7 +14,6 @@ import java.util.Date;
  * which triggers appropriate text.
  * @author fadiga
  */
-
 
 public class VisitVillageForm extends Form implements CommandListener {
 

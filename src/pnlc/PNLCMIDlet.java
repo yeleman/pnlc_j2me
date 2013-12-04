@@ -16,17 +16,19 @@ import pnlc.Configuration.*;
 import pnlc.MissionForm.*;
 import pnlc.VisitVillageForm.*;
 import pnlc.SendSavedReports.*;
-
+import pnlc.ChangePasswordForm.*;
 
 /**
  * @author FAD
  */
+
 public class PNLCMIDlet extends MIDlet implements CommandListener {
 
     private static final Command CMD_EXIT = new Command ("Quitter", Command.EXIT, 1);
     private static final Command CMD_VERSION = new Command ("Version", Command.SCREEN, 2);
     private static final Command CMD_SRVNUM = new Command ("Configuration", Command.SCREEN, 4);
     private static final Command CMD_HELP = new Command ("Aide", Command.HELP, 5);
+    private static final Command CMD_PASSWD = new Command ("Mot de passe", Command.SCREEN, 6);
 
     public Display display;
     public List mainMenu;
@@ -54,6 +56,7 @@ public class PNLCMIDlet extends MIDlet implements CommandListener {
             mainMenu.addCommand (CMD_HELP);
             mainMenu.addCommand (CMD_VERSION);
             mainMenu.addCommand (CMD_SRVNUM);
+            mainMenu.addCommand (CMD_PASSWD);
             display.setCurrent(mainMenu);
 
         }
@@ -107,6 +110,12 @@ public class PNLCMIDlet extends MIDlet implements CommandListener {
         // srvnum command displays Edit Number Form.
         if (c == CMD_SRVNUM) {
             OptionForm f = new OptionForm(this);
+            display.setCurrent(f);
+        }
+
+        // passwd command displays Change Password Form.
+        if (c == CMD_PASSWD) {
+            ChangePasswordForm f = new ChangePasswordForm(this);
             display.setCurrent(f);
         }
 
