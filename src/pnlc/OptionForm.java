@@ -61,6 +61,7 @@ public OptionForm(PNLCMIDlet midlet) {
             break;
         }
     }
+
     int dis_index = 0;
     String my_dis = config.get("district_code");
     for (int i=0; i<regions.length;i++) {

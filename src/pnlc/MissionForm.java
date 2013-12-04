@@ -116,9 +116,13 @@ public class MissionForm extends Form implements CommandListener {
     }
 
     public String toText() {
-        int mission_array[] = SharedChecks.formatDateString(arrived_or_left_on.getDate());
+        String sepa = "-";
+        int arrived_or_left_on_array[] = SharedChecks.formatDateString(arrived_or_left_on.getDate());
 
-        return "N-" + mission_array[0] + "] " + status_mission.getString(status_mission.getSelectedIndex());
+        return "[" + arrived_or_left_on_array[0] + sepa + arrived_or_left_on_array[1]
+                   + sepa + arrived_or_left_on_array[2] + "] "
+                   + status_mission.getString(status_mission.getSelectedIndex())
+                   + " mission";
     }
 
     public void commandAction(Command c, Displayable d) {

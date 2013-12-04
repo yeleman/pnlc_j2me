@@ -17,6 +17,8 @@ public class Constants {
     public static final String FIXED = "Fixe";
     public static final String MOBILE = "Mobile";
     public static final String ADVANCED = "Avancé";
+    public static final String FEMALE = " Femmes:";
+    public static final String MALE = " Hommes:";
     public static final int username_min_length = 4;
     public static final int password_min_length = 3;
     public static final int username_max_length = 8;

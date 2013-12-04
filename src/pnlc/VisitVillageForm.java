@@ -12,23 +12,22 @@ import java.util.Date;
  * J2ME Form displaying a long help text
  * Instanciated with a section paramater
  * which triggers appropriate text.
- * @author fadiga
+ * @author Fad
  */
 
 public class VisitVillageForm extends Form implements CommandListener {
 
     private static final Command CMD_EXIT = new Command ("Retour",  Command.BACK, 1);
-    // private static final Command CMD_SAVE = new Command ("Enreg.",
-    //                                                         Command.OK, 1);
     private static final Command CMD_SEND = new Command ("Envoi.", Command.OK, 1);
     private static final Command CMD_HELP = new Command ("Aide", Command.HELP, 2);
     private static final Command CMD_CONTINUE = new Command ("Continuer", Command.HELP, 2);
 
-    private static final int MAX_SIZE = 4;
 
     PNLCMIDlet midlet;
     Displayable returnTo;
+
     private String ErrorMessage = "";
+    private static final int MAX_SIZE = 4;
 
     private Configuration config;
     private SMSStore store;
@@ -52,9 +51,6 @@ public class VisitVillageForm extends Form implements CommandListener {
 
     Date now = new Date();
     String sep = " ";
-    String female = " Femmes:";
-    String male = " Hommes:";
-    // proxy from config
     String region_code;
     String district_code;
     String last_health_center;
@@ -74,14 +70,14 @@ public class VisitVillageForm extends Form implements CommandListener {
 
         //Text
         user_password = new TextField("Mot de passe:", null, 20, TextField.ANY);
-        consultation_male = new TextField(male, null, MAX_SIZE, TextField.DECIMAL);
-        consultation_female = new TextField(female, null, MAX_SIZE, TextField.DECIMAL);
-        surgery_male = new TextField(male, null, MAX_SIZE, TextField.DECIMAL);
-        surgery_female = new TextField(female, null, MAX_SIZE, TextField.DECIMAL);
-        refusal_male = new TextField(male, null, MAX_SIZE, TextField.DECIMAL);
-        refusal_female = new TextField(female, null, MAX_SIZE, TextField.DECIMAL);
-        recidivism_male = new TextField(male, null, MAX_SIZE, TextField.DECIMAL);
-        recidivism_female = new TextField(female, null, MAX_SIZE, TextField.DECIMAL);
+        consultation_male = new TextField(Constants.MALE, null, MAX_SIZE, TextField.DECIMAL);
+        consultation_female = new TextField(Constants.FEMALE, null, MAX_SIZE, TextField.DECIMAL);
+        surgery_male = new TextField(Constants.MALE, null, MAX_SIZE, TextField.DECIMAL);
+        surgery_female = new TextField(Constants.FEMALE, null, MAX_SIZE, TextField.DECIMAL);
+        refusal_male = new TextField(Constants.MALE, null, MAX_SIZE, TextField.DECIMAL);
+        refusal_female = new TextField(Constants.FEMALE, null, MAX_SIZE, TextField.DECIMAL);
+        recidivism_male = new TextField(Constants.MALE, null, MAX_SIZE, TextField.DECIMAL);
+        recidivism_female = new TextField(Constants.FEMALE, null, MAX_SIZE, TextField.DECIMAL);
 
         //date
         arrived_on =  new DateField(" arrivée:", DateField.DATE, TimeZone.getTimeZone("GMT"));
@@ -91,11 +87,10 @@ public class VisitVillageForm extends Form implements CommandListener {
         health_centerField = new ChoiceGroup("Aire de santé:",
                                              ChoiceGroup.POPUP,
                                              snisi.entities.Utils.hcenters_names(region_code, district_code), null);
-        // health_centerField.setSelectedIndex(Integer.parseInt(last_health_center), true);
+        health_centerField.setSelectedIndex(Integer.parseInt(last_health_center), true);
 
         //choice
         commutity_assistance = new ChoiceGroup("Aide du relais:", ChoiceGroup.POPUP, YesNon, null);
-
         append(health_centerField);
 
 
@@ -110,6 +105,30 @@ public class VisitVillageForm extends Form implements CommandListener {
 
         // all fields are required to be filled.
         if (user_password.getString().length() == 0) {
+            return false;
+        }
+        if (consultation_male.getString().length() == 0) {
+            return false;
+        }
+        if (consultation_female.getString().length() == 0) {
+            return false;
+        }
+        if (surgery_male.getString().length() == 0) {
+            return false;
+        }
+        if (surgery_female.getString().length() == 0) {
+            return false;
+        }
+        if (refusal_male.getString().length() == 0) {
+            return false;
+        }
+        if (refusal_female.getString().length() == 0) {
+            return false;
+        }
+        if (recidivism_male.getString().length() == 0) {
+            return false;
+        }
+        if (recidivism_female.getString().length() == 0) {
             return false;
         }
         return true;
@@ -155,14 +174,15 @@ public class VisitVillageForm extends Form implements CommandListener {
             relay = 0;
 
         String user_name = config.get("user_name");
+        String health_center_code_index = String.valueOf(health_centerField.getSelectedIndex());
 
         // On sauvegarde l'index du centre de santé pour l'ulitiser par defaut après
-        config.set("last_health_center", health_center_code);
+        config.set("last_health_center", health_center_code_index);
 
         // village location
         village_code = snisi.entities.Utils.villages_codes(region_code, district_code, health_center_code)[locationField.getSelectedIndex()];
 
-        return "tt visit" + sep + user_name + sep + user_password.getString()
+        return "tt visit" + sep + user_name + sep + user_password.getString().replace(' ', '_')
                           + sep + village_code
                           + sep + consultation_male.getString()
                           + sep + consultation_female.getString()
@@ -177,9 +197,11 @@ public class VisitVillageForm extends Form implements CommandListener {
     }
 
     public String toText() {
+        String sepa = "-";
         int left_on_array[] = SharedChecks.formatDateString(left_on.getDate());
 
-        return "N-" + left_on_array[0] + "] ";
+        return "[" + left_on_array[0] + sepa + left_on_array[1]
+                   + sepa + left_on_array[2] + "] " + locationField.getString(locationField.getSelectedIndex());
     }
 
     public void commandAction(Command c, Displayable d) {
@@ -201,7 +223,6 @@ public class VisitVillageForm extends Form implements CommandListener {
                                             snisi.entities.Utils.villages_names(region_code,
                                                                     district_code,
                                                                     health_center_code), null);
-            // locationField = new ChoiceGroup("Code village (visite):", ChoiceGroup.POPUP, snisi.entities.Utils.villages_names(health_center_code), null);
 
             append(locationField);
             append("Nb consultés");
