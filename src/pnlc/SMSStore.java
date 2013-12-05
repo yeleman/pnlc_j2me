@@ -17,7 +17,7 @@ import pnlc.Constants.*;
  * StoredSMS[] all_sms = store.getAll();
  * StoredSMS sms = all_sms[i];
  * System.out.println(i + ": " + sms.name + " -- " + sms.sms);
- * 
+ *
  * store.delete(2);
  * store.get(1);
  */
@@ -185,7 +185,7 @@ public class SMSStore {
         if (index < 0) {
             return blank_sms;
         }
-        
+
         try
         {
         // open record store
@@ -277,7 +277,7 @@ public class SMSStore {
      */
     private String[] split(String original, String separator) {
         Vector nodes = new Vector();
-        
+
         // Parse nodes into vector
         int index = original.indexOf(separator);
         while(index >= 0) {

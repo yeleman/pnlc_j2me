@@ -207,7 +207,7 @@ public class VisitVillageForm extends Form implements CommandListener {
     public void commandAction(Command c, Displayable d) {
         // help command displays Help Form.
         if (c == CMD_HELP) {
-            HelpForm h = new HelpForm(this.midlet, this, "Visite village");
+            HelpForm h = new HelpForm(this.midlet, this, "visite_village");
             this.midlet.display.setCurrent(h);
         }
 

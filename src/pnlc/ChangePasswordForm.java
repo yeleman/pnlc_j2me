@@ -2,7 +2,6 @@
 package pnlc;
 
 import javax.microedition.lcdui.*;
-import javax.microedition.lcdui.Font;
 import pnlc.PNLCMIDlet.*;
 import pnlc.Configuration.*;
 import pnlc.SMSSender.*;
@@ -21,7 +20,8 @@ public class ChangePasswordForm extends Form implements CommandListener {
 
     private PNLCMIDlet midlet;
 
-    // private TextField usernameField;
+
+    private String ErrorMessage = "";
     private TextField oldpasswordField;
     private TextField newpasswordField;
 
@@ -37,12 +37,10 @@ public class ChangePasswordForm extends Form implements CommandListener {
 
         username = config.get("user_name");
 
-        // usernameField = new TextField ("Identifiant:", username, 8, TextField.PLAIN);
         oldpasswordField = new TextField ("Ancien mot de passe", "", Constants.password_max_length, TextField.ANY);
         newpasswordField = new TextField ("Nouveau mot de passe", "", Constants.password_max_length, TextField.ANY);
 
         append("Identifiant: " + username);
-        // append(usernameField);
         append(oldpasswordField);
         append(newpasswordField);
 
@@ -57,13 +55,16 @@ public class ChangePasswordForm extends Form implements CommandListener {
      * @return <code>true</code> if fields are properly field for sending
      * <code>false</code> otherwise.
      */
-    public boolean canSubmit() {
-        if (oldpasswordField.getString().length() >= Constants.password_min_length &&
-            //usernameField.getString().length() >= Constants.username_min_length &&
-            newpasswordField.getString().length() >= Constants.password_min_length) {
-            return true;
+    public boolean isValid() {
+        if (oldpasswordField.getString().length() < Constants.password_min_length) {
+            ErrorMessage =  "L'Ancien ";
+            return false;
         }
-        return false;
+        if (newpasswordField.getString().length() < Constants.password_min_length) {
+            ErrorMessage =  "Nouveau ";
+            return false;
+        }
+        return true;
     }
 
     /*
@@ -94,8 +95,10 @@ public class ChangePasswordForm extends Form implements CommandListener {
         if (c == CMD_SEND) {
             Alert alert;
 
-            if (!canSubmit()) {
-                alert = new Alert ("Informations incorrectes.", "L'identifiant ou les mots de passe ne sont pas renseignés correctement.", null, AlertType.ERROR);
+            if (!isValid()) {
+                alert = new Alert ("Informations incorrectes.", ErrorMessage +
+                                   "mot de passe ne peut être inférieure à 3 caractères.",
+                                    null, AlertType.ERROR);
                 this.midlet.display.setCurrent (alert, this);
                 return;
             }
@@ -105,11 +108,12 @@ public class ChangePasswordForm extends Form implements CommandListener {
 
             if (sms.send(number, this.toSMSFormat())) {
                 alert = new Alert ("Demande envoyée !", "Vous allez recevoir une confirmation du serveur.", null, AlertType.CONFIRMATION);
+                this.midlet.startApp();
+                this.midlet.display.setCurrent (alert, this.midlet.mainMenu);
             } else {
                 alert = new Alert ("Échec d'envoi SMS", "Impossible d'envoyer la demande par SMS.", null, AlertType.WARNING);
+                this.midlet.display.setCurrent (alert, this);
             }
-
-            this.midlet.display.setCurrent (alert, this);
         }
     }
 }

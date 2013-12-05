@@ -37,21 +37,44 @@ public class HelpForm extends Form implements CommandListener {
 
     private void getContentFromSection(String section) {
         String text;
-
         if (section.equalsIgnoreCase("mainmenu")) {
             text = "Ouvrez le formulaire qui correspond à votre opération puis " +
                    "renseignez les champs et envoyez.\n" +
-                   "Un SMS non envoyé est sauvegardé dans <<Envoi form>>.\n" +
-                   "En cas de problème, contactez l'ANTIM.";
+                   "Un SMS non envoyé est sauvegardé dans <<Renvoi form>>.";
+
         } else if (section.equalsIgnoreCase("version")) {
-            text = "PNLC - Version " + Constants.version + "\n\n" +
-                   "En cas de problème, contactez l'ANTIM.";
+            text = "PNLC - Version " + Constants.version;
+
         } else if (section.equalsIgnoreCase("Mission")) {
-            text = "Message d'aide pour le formulaire de Mission.";
+            text = "Ce formulaire permet de déclarer le début ou la fin de "+
+                   " mission tout en precisant la date et la stratégie. \n" +
+                   "Car chaque rapports doit être obligatoirement lié à une mission.";
+
+        } else if (section.equalsIgnoreCase("visite_village")) {
+            text = "Renseignez les champs et envoyez.";
+
+        } else if (section.equalsIgnoreCase("option")) {
+            text = "Changez le numéro du serveur uniquement sur " +
+                   "demande expresse de " + Constants.HEAD_OF_MAINTENANCE +
+                   "\nUn mauvais numéro vous empêchera de transmettre vos" +
+                   " rapports.\n";
+
+        } else if (section.equalsIgnoreCase("saved_reports")) {
+            text = "Vous pouvez envoyer tous les SMS à la fois ou le faire un à un.";
+
+        } else if (section.equalsIgnoreCase("passwd")) {
+            text = "Renseignez votre ancien mot de passe dans les champs adéquat.\n" +
+                   "Ensuite, indiquez le nouveau mot de passe désiré. Celui-ci doit faire au moins 3 caractères.\n" +
+                   "Vous recevrez un SMS du serveur confirmant ou non le changement de mot de passe.";
+
         } else {
             text = "Aucune aide disponible pour cet élément.";
+
         }
-        helpText = new StringItem(null, text);
+
+        helpText = new StringItem(null, text +
+                                  "\n\nEn cas de problème, contactez " +
+                                  Constants.HEAD_OF_MAINTENANCE + ".");
     }
 
     public void commandAction(Command c, Displayable d) {

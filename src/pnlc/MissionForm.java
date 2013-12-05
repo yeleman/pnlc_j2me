@@ -91,7 +91,7 @@ public class MissionForm extends Form implements CommandListener {
         String type_strategy = null;
 
         int arrived_or_left_on_array[] = SharedChecks.formatDateString(arrived_or_left_on.getDate());
-        String arrived_or_left_on = String.valueOf(arrived_or_left_on_array[2])
+        String arrived_or_left = String.valueOf(arrived_or_left_on_array[2])
                              + SharedChecks.addzero(arrived_or_left_on_array[1])
                              + SharedChecks.addzero(arrived_or_left_on_array[0]);
 
@@ -112,7 +112,7 @@ public class MissionForm extends Form implements CommandListener {
             type_strategy = "advanced";
 
         return "tt" + sep + mission + sep + user_name + sep + user_password.getString() + sep + district_code
-                    + sep + operator_type + sep + arrived_or_left_on + sep + type_strategy;
+                    + sep + operator_type + sep + arrived_or_left + sep + type_strategy;
     }
 
     public String toText() {

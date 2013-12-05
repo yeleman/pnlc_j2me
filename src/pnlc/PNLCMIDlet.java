@@ -58,7 +58,6 @@ public class PNLCMIDlet extends MIDlet implements CommandListener {
             mainMenu.addCommand (CMD_SRVNUM);
             mainMenu.addCommand (CMD_PASSWD);
             display.setCurrent(mainMenu);
-
         }
     }
 

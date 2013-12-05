@@ -15,23 +15,25 @@ import snisi.entities.Utils.*;
 public class OptionForm extends Form implements CommandListener {
 
     private static final Command CMD_EXIT = new Command ("Retour", Command.BACK, 1);
-    private static final Command CMD_SAVE = new Command ("Enreg.", Command.OK, 1);
-    private static final Command CMD_HELP = new Command ("Aide", Command.HELP, 2);
-    private static final Command CMD_CONTINUE = new Command ("Continuer", Command.HELP, 2);
+    private static final Command CMD_SAVE = new Command ("Enreg.", Command.OK, 2);
+    private static final Command CMD_CONTINUE = new Command ("Continuer", Command.HELP, 3);
+    private static final Command CMD_HELP = new Command ("Aide", Command.HELP, 4);
+
+    PNLCMIDlet midlet;
+    //Displayable returnTo;
+    private String ErrorMessage = "";
 
     private Configuration config;
     private String[] regions;
 
-    private static final String[] TypeOp = {"AMO","TSO", "OPT"};
+    private static final String[] TypeOp = {"AMO", "TSO", "OPT"};
     private TextField numberField;
     private TextField user_nameField;
     //choice
     private ChoiceGroup regionField;
     private ChoiceGroup districtField;
     private ChoiceGroup operator_typeField;
-    private String ErrorMessage = "";
 
-    PNLCMIDlet midlet;
 
 public OptionForm(PNLCMIDlet midlet) {
     super("Paramètres de transmission");
@@ -82,6 +84,7 @@ public OptionForm(PNLCMIDlet midlet) {
     addCommand(CMD_CONTINUE);
     addCommand(CMD_EXIT);
     addCommand(CMD_HELP);
+
     this.setCommandListener(this);
   }
 
@@ -119,6 +122,7 @@ public OptionForm(PNLCMIDlet midlet) {
         // exit command goes back to Main Menu
         if (c == CMD_EXIT) {
             this.midlet.display.setCurrent(this.midlet.mainMenu);
+            return;
         }
 
         if (c == CMD_CONTINUE) {
