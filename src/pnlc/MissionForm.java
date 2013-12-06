@@ -92,8 +92,8 @@ public class MissionForm extends Form implements CommandListener {
 
         int arrived_or_left_on_array[] = SharedChecks.formatDateString(arrived_or_left_on.getDate());
         String arrived_or_left = String.valueOf(arrived_or_left_on_array[2])
-                             + SharedChecks.addzero(arrived_or_left_on_array[1])
-                             + SharedChecks.addzero(arrived_or_left_on_array[0]);
+                               + SharedChecks.addzero(arrived_or_left_on_array[1])
+                               + SharedChecks.addzero(arrived_or_left_on_array[0]);
 
         String user_name = config.get("user_name");
         String district_code = config.get("district_code");
@@ -111,8 +111,13 @@ public class MissionForm extends Form implements CommandListener {
         if (strategy.getString(strategy.getSelectedIndex()).equals(Constants.ADVANCED))
             type_strategy = "advanced";
 
-        return "tt" + sep + mission + sep + user_name + sep + user_password.getString() + sep + district_code
-                    + sep + operator_type + sep + arrived_or_left + sep + type_strategy;
+        return "tt" + sep + mission
+                    + sep + user_name.replace(' ', '_')
+                    + sep + user_password.getString().replace(' ', '_')
+                    + sep + district_code
+                    + sep + operator_type
+                    + sep + arrived_or_left
+                    + sep + type_strategy;
     }
 
     public String toText() {

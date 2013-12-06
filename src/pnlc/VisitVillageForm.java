@@ -137,6 +137,34 @@ public class VisitVillageForm extends Form implements CommandListener {
     public boolean isValid() {
         ErrorMessage = "La date indiquée est dans le futur.";
 
+        int consultation = Integer.parseInt(consultation_male.getString()) +
+                           Integer.parseInt(consultation_female.getString());
+        int surgery = Integer.parseInt(surgery_male.getString()) +
+                      Integer.parseInt(surgery_female.getString());
+        int refusal = Integer.parseInt(refusal_male.getString()) +
+                      Integer.parseInt(refusal_female.getString());
+        int recidivism = Integer.parseInt(recidivism_male.getString()) +
+                         Integer.parseInt(recidivism_female.getString());
+
+        if (surgery > consultation) {
+            ErrorMessage = "[Erreur] Nombre total opérés ne peut être superière au nombre total consulté.";
+            return false;
+        }
+        if (refusal > consultation) {
+            ErrorMessage = "[Erreur] Nombre total refus ne peut être superière au nombre total consulté.";
+            return false;
+        }
+        if (recidivism > consultation) {
+            ErrorMessage = "[Erreur] Nombre total récidives ne peut être superière au nombre total consulté.";
+            return false;
+        }
+
+        if ((surgery + refusal + recidivism) > consultation) {
+            ErrorMessage = "[Erreur] La somme des totaux de opérés, refus et récidives ne peut être superière au nombre total consulté.";
+            return false;
+        }
+
+        // Checks Dates
         if (SharedChecks.isDateValide(arrived_on.getDate()) != true) {
             ErrorMessage = "[Date d'arrivée] " + ErrorMessage;
             return false;
@@ -182,7 +210,8 @@ public class VisitVillageForm extends Form implements CommandListener {
         // village location
         village_code = snisi.entities.Utils.villages_codes(region_code, district_code, health_center_code)[locationField.getSelectedIndex()];
 
-        return "tt visit" + sep + user_name + sep + user_password.getString().replace(' ', '_')
+        return "tt visit" + sep + user_name.replace(' ', '_')
+                          + sep + user_password.getString().replace(' ', '_')
                           + sep + village_code
                           + sep + consultation_male.getString()
                           + sep + consultation_female.getString()
@@ -193,7 +222,8 @@ public class VisitVillageForm extends Form implements CommandListener {
                           + sep + recidivism_male.getString()
                           + sep + recidivism_female.getString()
                           + sep + relay
-                          + sep + arrived_on_d + sep + left_on_d;
+                          + sep + arrived_on_d
+                          + sep + left_on_d;
     }
 
     public String toText() {

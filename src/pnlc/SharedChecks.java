@@ -119,19 +119,20 @@ public class SharedChecks {
         }
     }
 
-        public static boolean compareleftarrived(Date dob, Date dod) {
+    public static boolean compareleftarrived(Date arrived_on, Date left_on) {
         // all fields are required to be filled.
-        int array[] = formatDateString(dob);
-        int dob_day = array[0];
-        int dob_month = array[1];
-        int dob_year = array[2];
+        int array[] = formatDateString(arrived_on);
+        int arrived_on_day = array[0];
+        int arrived_on_month = array[1];
+        int arrived_on_year = array[2];
 
-        int[] dateU5 = formatDateString(dod);
-        int dod_day = dateU5[0];
-        int dod_month = dateU5[1];
-        int dod_year = dateU5[2];
+        int[] dateU5 = formatDateString(left_on);
+        int left_on_day = dateU5[0];
+        int left_on_month = dateU5[1];
+        int left_on_year = dateU5[2];
 
-        if (is_before(dod_day, dod_month, dod_year, dob_day, dob_month, dob_year) == true)
+        if (is_before(left_on_day, left_on_month, left_on_year, arrived_on_day,
+                      arrived_on_month, arrived_on_year) == true)
             return true;
         else
             return false;
@@ -182,6 +183,6 @@ public class SharedChecks {
                 return;
             }
         }
-}
+    }
 
 }
