@@ -147,20 +147,25 @@ public class VisitVillageForm extends Form implements CommandListener {
                          Integer.parseInt(recidivism_female.getString());
 
         if (surgery > consultation) {
-            ErrorMessage = "[Erreur] Nombre total opérés ne peut être superière au nombre total consulté.";
+            ErrorMessage = "[Erreur] Nombre total opérés (M + F) ne peut être " +
+                           "supérieur au nombre total consultés (M + F).";
             return false;
         }
         if (refusal > consultation) {
-            ErrorMessage = "[Erreur] Nombre total refus ne peut être superière au nombre total consulté.";
+            ErrorMessage = "[Erreur] Nombre total refus (M + F) ne peut être " +
+                           "supérieur au nombre total consultés (M + F).";
             return false;
         }
         if (recidivism > consultation) {
-            ErrorMessage = "[Erreur] Nombre total récidives ne peut être superière au nombre total consulté.";
+            ErrorMessage = "[Erreur] Nombre total récidives (M + F) ne peut " +
+                           "être supérieur au nombre total consultés (M + F).";
             return false;
         }
 
         if ((surgery + refusal + recidivism) > consultation) {
-            ErrorMessage = "[Erreur] La somme des totaux de opérés, refus et récidives ne peut être superière au nombre total consulté.";
+            ErrorMessage = "[Erreur] La somme des totaux des opérés, refus " +
+                           "et récidives ne peut être supérieur au nombre " +
+                           "total consultés.";
             return false;
         }
 
@@ -174,8 +179,10 @@ public class VisitVillageForm extends Form implements CommandListener {
             ErrorMessage = "[Date de départ] " + ErrorMessage;
             return false;
         }
-        if (SharedChecks.compareleftarrived(arrived_on.getDate(), left_on.getDate()) == true) {
-            ErrorMessage = "[Erreur] la date de départ ne peut pas être antérieure à la date d'arrivée.";
+        if (SharedChecks.compareleftarrived(arrived_on.getDate(),
+                                            left_on.getDate()) == true) {
+            ErrorMessage = "[Erreur] la date de départ ne peut pas être " +
+                           "antérieure à la date d'arrivée.";
             return false;
         }
 
@@ -207,7 +214,8 @@ public class VisitVillageForm extends Form implements CommandListener {
         config.set("last_health_center", health_center_code_index);
 
         // village location
-        village_code = snisi.entities.Utils.villages_codes(region_code, district_code, health_center_code)[locationField.getSelectedIndex()];
+        village_code = snisi.entities.Utils.villages_codes(region_code, district_code,
+                                                           health_center_code)[locationField.getSelectedIndex()];
 
         return "tt visit" + sep + user_name.replace(' ', '_')
                           + sep + user_password.getString().replace(' ', '_')

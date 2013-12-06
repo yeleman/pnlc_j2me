@@ -132,7 +132,6 @@ public OptionForm(PNLCMIDlet midlet) {
 
             districtField = new ChoiceGroup("Votre District", ChoiceGroup.POPUP,
                                             snisi.entities.Utils.districts_names(regions[regionField.getSelectedIndex()]), null);
-
             districtField.setSelectedIndex(dis_index, true);
             append(districtField);
             removeCommand(CMD_CONTINUE);
@@ -159,7 +158,6 @@ public OptionForm(PNLCMIDlet midlet) {
                 this.midlet.display.setCurrent (alert, this);
                 return;
             }
-
 
             String region_code = regions[regionField.getSelectedIndex()];
             String district_code = snisi.entities.Utils.districts_codes(region_code)[districtField.getSelectedIndex()];

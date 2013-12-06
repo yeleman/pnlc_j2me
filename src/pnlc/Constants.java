@@ -11,8 +11,8 @@ public class Constants {
     public static final String server_number = "70062552";
     public static final String OUI = "Oui";
     public static final String NON = "Non";
-    public static final String START = "Début";
-    public static final String END = "Fin";
+    public static final String START = "beginning";
+    public static final String END = "end";
     public static final String FIXED = "Fixe";
     public static final String MOBILE = "Mobile";
     public static final String ADVANCED = "Avancé";

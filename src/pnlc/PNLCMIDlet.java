@@ -33,6 +33,7 @@ public class PNLCMIDlet extends MIDlet implements CommandListener {
     public Display display;
     public List mainMenu;
     private Configuration config;
+    public String mission;
 
     public PNLCMIDlet() {
         display = Display.getDisplay(this);
@@ -42,7 +43,7 @@ public class PNLCMIDlet extends MIDlet implements CommandListener {
         config = new Configuration();
         SMSStore store = new SMSStore();
 
-        String[] mainMenu_ = {"Mission", "Formulaire TT",
+        String[] mainMenu_ = {"Début Mission", "Fin Mission", "Formulaire TT",
                               "Renvoi form. (" + store.count() + ")"};
 
         if(config.get("user_name").equals("")){
@@ -75,18 +76,25 @@ public class PNLCMIDlet extends MIDlet implements CommandListener {
             if (c == List.SELECT_COMMAND) {
 
                 switch (((List) s).getSelectedIndex ()) {
-                // Mark the beginning or end of a mission
+                // Mark the beginning of a mission
                 case 0:
+                    this.mission = Constants.START;
                     MissionForm mission_form = new MissionForm(this);
                     display.setCurrent (mission_form);
                     break;
-                // End of the visit of a village
+                // Mark the end of a mission
                 case 1:
+                    this.mission = Constants.END;
+                    MissionForm end_mission_form = new MissionForm(this);
+                    display.setCurrent (end_mission_form);
+                    break;
+                // End of the visit of a village
+                case 2:
                     VisitVillageForm visit_village_form = new VisitVillageForm(this);
                     display.setCurrent (visit_village_form);
                     break;
                 // submit stored messages
-                case 2:
+                case 3:
                     SendSavedReports saved_reports = new SendSavedReports(this);
                     display.setCurrent (saved_reports);
                     break;
