@@ -33,6 +33,7 @@ public class OptionForm extends Form implements CommandListener {
     private ChoiceGroup regionField;
     private ChoiceGroup districtField;
     private ChoiceGroup operator_typeField;
+    String last_region;
 
 
 public OptionForm(PNLCMIDlet midlet) {
@@ -50,11 +51,6 @@ public OptionForm(PNLCMIDlet midlet) {
         phone_number = Constants.server_number;
     }
 
-    numberField = new TextField ("Numéro du serveur:", phone_number, 8, TextField.PHONENUMBER);
-    user_nameField = new TextField("Votre Identifiant", config.get("user_name"), 20, TextField.ANY);
-    regionField = new ChoiceGroup("Votre Région", ChoiceGroup.POPUP, snisi.entities.Utils.regions_names(), null);
-    operator_typeField = new ChoiceGroup("Votre Profil", ChoiceGroup.POPUP, TypeOp, null);
-
     int op_index = 0;
     String my_type_op = config.get("operator_type");
     for (int i = 0; i<TypeOp.length ; i++) {
@@ -64,17 +60,12 @@ public OptionForm(PNLCMIDlet midlet) {
         }
     }
 
-    int dis_index = 0;
-    String my_dis = config.get("district_code");
-    for (int i=0; i<regions.length;i++) {
-        if (regions[i].equals(my_dis)) {
-            dis_index = i;
-            break;
-        }
-    }
-
+    numberField = new TextField ("Numéro du serveur:", phone_number, 8, TextField.PHONENUMBER);
+    user_nameField = new TextField("Votre Identifiant", config.get("user_name"), 20, TextField.ANY);
+    regionField = new ChoiceGroup("Votre Région", ChoiceGroup.POPUP, snisi.entities.Utils.regions_names(), null);
+    regionField.setSelectedIndex(Integer.parseInt(config.get("last_region")), true);
+    operator_typeField = new ChoiceGroup("Votre Profil", ChoiceGroup.POPUP, TypeOp, null);
     operator_typeField.setSelectedIndex(op_index, true);
-    regionField.setSelectedIndex(dis_index, true);
 
     append(numberField);
     append(user_nameField);
@@ -126,9 +117,23 @@ public OptionForm(PNLCMIDlet midlet) {
         }
 
         if (c == CMD_CONTINUE) {
+
+            String last_region_index = String.valueOf(regionField.getSelectedIndex());
+            config.set("last_region", last_region_index);
+
+            int dis_index = 0;
+            String my_dis = config.get("district_code");
+            for (int i=0; i<regions.length;i++) {
+                if (regions[i].equals(my_dis)) {
+                    dis_index = i;
+                    break;
+                }
+            }
+
             districtField = new ChoiceGroup("Votre District", ChoiceGroup.POPUP,
                                             snisi.entities.Utils.districts_names(regions[regionField.getSelectedIndex()]), null);
 
+            districtField.setSelectedIndex(dis_index, true);
             append(districtField);
             removeCommand(CMD_CONTINUE);
             addCommand(CMD_SAVE);

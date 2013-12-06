@@ -195,7 +195,6 @@ public class VisitVillageForm extends Form implements CommandListener {
                              + SharedChecks.addzero(left_on_array[1])
                              + SharedChecks.addzero(left_on_array[0]);
 
-
         if (commutity_assistance.getString(commutity_assistance.getSelectedIndex()).equals(Constants.OUI))
             relay = 1;
         else
