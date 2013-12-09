@@ -91,10 +91,9 @@ public class MissionForm extends Form implements CommandListener {
                                + SharedChecks.addzero(arrived_or_left_on_array[1])
                                + SharedChecks.addzero(arrived_or_left_on_array[0]);
 
-        message = user_name.replace(' ', '_')
-                  + sep + user_password.getString().replace(' ', '_')
+        message = user_name.replace(' ', Constants.CLEANER)
+                  + sep + user_password.getString().replace(' ', Constants.CLEANER)
                   + sep + district_code
-                  + sep + operator_type
                   + sep + arrived_or_left;
 
         if (this.midlet.mission.equals(Constants.START)){
@@ -106,7 +105,7 @@ public class MissionForm extends Form implements CommandListener {
                 type_strategy = "mobile";
             if (strategy.getString(strategy.getSelectedIndex()).equals(Constants.ADVANCED))
                 type_strategy = "advanced";
-            message = message + sep + type_strategy;
+            message = message + sep + operator_type+ sep + type_strategy;
         }
 
        return "tt" + sep + mission + sep + message;

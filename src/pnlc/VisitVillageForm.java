@@ -217,8 +217,8 @@ public class VisitVillageForm extends Form implements CommandListener {
         village_code = snisi.entities.Utils.villages_codes(region_code, district_code,
                                                            health_center_code)[locationField.getSelectedIndex()];
 
-        return "tt visit" + sep + user_name.replace(' ', '_')
-                          + sep + user_password.getString().replace(' ', '_')
+        return "tt visit" + sep + user_name.replace(' ', Constants.CLEANER)
+                          + sep + user_password.getString().replace(' ', Constants.CLEANER)
                           + sep + village_code
                           + sep + consultation_male.getString()
                           + sep + consultation_female.getString()

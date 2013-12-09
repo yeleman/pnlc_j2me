@@ -73,9 +73,9 @@ public class ChangePasswordForm extends Form implements CommandListener {
      */
     public String toSMSFormat() {
         String sep = " ";
-        return "tt passwd" + sep + username.replace(' ', '_')
-                           + sep + oldpasswordField.getString().replace(' ', '_')
-                           + sep + newpasswordField.getString().replace(' ', '_');
+        return "passwd" + sep + username.replace(' ', Constants.CLEANER)
+                        + sep + oldpasswordField.getString().replace(' ', Constants.CLEANER)
+                        + sep + newpasswordField.getString().replace(' ', Constants.CLEANER);
     }
 
     public void commandAction(Command c, Displayable d) {
