@@ -7,7 +7,6 @@ import snisi.entities.StaticCodes;
 
 /**
  * StaticCodes Management
- * @author reg
  */
 
 public class Utils {
@@ -94,21 +93,18 @@ public class Utils {
         return list_from_enum(myregion.children_names, true);
     }
 
-    public static String[] hcenters_codes(String region_code,
-                                          String district_code) {
+    public static String[] hcenters_codes(String district_code) {
 
         EntityHashTable mydistrict = districtHashTable(district_code);
         return getListOfValuesFromVector(mydistrict.children, false);
     }
 
-    public static String[] hcenters_names(String region_code,
-                                          String district_code) {
+    public static String[] hcenters_names(String district_code) {
         EntityHashTable mydistrict = districtHashTable(district_code);
         return getListOfValuesFromVector(mydistrict.children, true);
     }
 
-    public static String[] villages_codes(String region_code,
-                                          String district_code,
+    public static String[] villages_codes(String district_code,
                                           String hcenter_code) {
         EntityHashTable mydistrict = districtHashTable(district_code);
         EntityHashTable myhcenter = getTableFromVector(hcenter_code,
@@ -117,8 +113,7 @@ public class Utils {
         return getListOfValuesFromVector(myhcenter.children, false);
     }
 
-    public static String[] villages_names(String region_code,
-                                          String district_code,
+    public static String[] villages_names(String district_code,
                                           String hcenter_code) {
         EntityHashTable mydistrict = districtHashTable(district_code);
         EntityHashTable myhcenter = getTableFromVector(hcenter_code,
