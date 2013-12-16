@@ -86,7 +86,7 @@ public class VisitVillageForm extends Form implements CommandListener {
         left_on.setDate(now);
         health_centerField = new ChoiceGroup("Aire de santé:",
                                              ChoiceGroup.POPUP,
-                                             snisi.entities.Utils.hcenters_names(region_code, district_code), null);
+                                             snisi.entities.Utils.hcenters_names(district_code), null);
         health_centerField.setSelectedIndex(Integer.parseInt(last_health_center), true);
 
         //choice
@@ -214,7 +214,7 @@ public class VisitVillageForm extends Form implements CommandListener {
         config.set("last_health_center", health_center_code_index);
 
         // village location
-        village_code = snisi.entities.Utils.villages_codes(region_code, district_code,
+        village_code = snisi.entities.Utils.villages_codes(district_code,
                                                            health_center_code)[locationField.getSelectedIndex()];
 
         return "tt visit" + sep + user_name.replace(' ', Constants.CLEANER)
@@ -254,12 +254,12 @@ public class VisitVillageForm extends Form implements CommandListener {
         }
 
         if (c == CMD_CONTINUE) {
-            health_center_code = snisi.entities.Utils.hcenters_codes(region_code, district_code)[health_centerField.getSelectedIndex()];
-            locationField = new ChoiceGroup("Village:",
-                                            ChoiceGroup.POPUP,
-                                            snisi.entities.Utils.villages_names(region_code,
-                                                                    district_code,
-                                                                    health_center_code), null);
+            health_center_code = snisi.entities.Utils.hcenters_codes(district_code)[health_centerField.getSelectedIndex()];
+            System.out.println("district_code: " + district_code);
+            System.out.println("health_center_code: " + health_center_code);
+            locationField = new ChoiceGroup("Village:",ChoiceGroup.POPUP,
+                                            snisi.entities.Utils.villages_names(district_code,
+                                            health_center_code), null);
 
             append(locationField);
             append("Nb consultés");

@@ -3,7 +3,6 @@ package snisi.entities;
 import java.util.Vector;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import snisi.entities.StaticCodes;
 
 /**
  * StaticCodes Management
@@ -17,7 +16,6 @@ public class Utils {
 
     public static EntityHashTable getTableFromVector(String code, Vector vector) {
         System.out.println("getTableFromVector");
-
         for(Enumeration elem = vector.elements(); elem.hasMoreElements();) {
             EntityHashTable elem_ht = (EntityHashTable)elem.nextElement();
             if (elem_ht.code.equals(code)) {
