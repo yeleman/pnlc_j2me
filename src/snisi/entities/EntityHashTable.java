@@ -1,19 +1,14 @@
 package snisi.entities;
 
 import java.util.Vector;
-
-/**
- * List of static codes and names for Entities/Locations
- * Automatically generated.
- * @author reg
- */
-
+import java.util.Hashtable;
 
 public class EntityHashTable {
 
-    String code;
-    String name;
-    Vector children = new Vector();
+    public String code;
+    public String name;
+    public Vector children = new Vector();
+    public Hashtable children_names = new Hashtable();
 
     public EntityHashTable() {
     }
