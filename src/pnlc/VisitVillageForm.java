@@ -321,6 +321,7 @@ public class VisitVillageForm extends Form implements CommandListener {
                     alert = new Alert ("Échec d'enregistrement", "Impossible d'envoyer ni d'enregistrer dans le téléphone.", null,
                                        AlertType.WARNING);
                 }
+                alert.setTimeout(Alert.FOREVER);
                 this.midlet.startApp();
                 this.midlet.display.setCurrent (alert, this.midlet.mainMenu);
             }
