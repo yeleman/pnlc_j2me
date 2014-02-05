@@ -147,68 +147,68 @@ public class VisitVillageForm extends Form implements CommandListener {
         int recidivism_fe = Integer.parseInt(recidivism_female.getString());
 
         // operés <= consulté
-        // (Homme)
+        // (Hommes)
         if (surgery_m > consultation_m) {
-            ErrorMessage = "[Erreur] Nombre d'opérés homme (" +  surgery_m +
+            ErrorMessage = "[Erreur] Nombre d'opérés hommes (" +  surgery_m +
                            ") ne peut être supérieur au nombre de " +
-                           "consultés homme (" + consultation_m + ").";
+                           "consultés hommes (" + consultation_m + ").";
             return false;
         }
-         // (femme)
+         // (femmes)
         if (surgery_fe > consultation_fe) {
-            ErrorMessage =  "[Erreur] Nombre d'opérés femme (" +  surgery_fe +
+            ErrorMessage =  "[Erreur] Nombre d'opérés femmes (" +  surgery_fe +
                            ") ne peut être supérieur au nombre de " +
-                           "consultés femme (" + consultation_fe + ").";
+                           "consultés femmes (" + consultation_fe + ").";
             return false;
         }
 
         // refus <= consultés
-        // (Homme)
+        // (Hommes)
         if (refusal_m > consultation_m) {
-            ErrorMessage = "[Erreur] Nombre de refus homme (" +  refusal_m +
+            ErrorMessage = "[Erreur] Nombre de refus hommes (" +  refusal_m +
                            ") ne peut être supérieur au nombre de " +
-                           "consultés homme (" + consultation_m + ").";
+                           "consultés hommes (" + consultation_m + ").";
             return false;
         }
-        // (femme)
+        // (femmes)
         if (refusal_fe > consultation_fe) {
-            ErrorMessage =  "[Erreur] Nombre de refus femme (" +  refusal_fe +
+            ErrorMessage =  "[Erreur] Nombre de refus femmes (" +  refusal_fe +
                            ") ne peut être supérieur au nombre de " +
-                           "consultés femme (" + consultation_fe + ").";
+                           "consultés femmes (" + consultation_fe + ").";
             return false;
         }
 
         // récidives <= opérés
-        // (Homme)
+        // (Hommes)
         if (recidivism_m > surgery_m) {
-            ErrorMessage = "[Erreur] Nombre de récidives homme (" + recidivism_m +
+            ErrorMessage = "[Erreur] Nombre de récidives hommes (" + recidivism_m +
                            ") ne peut être supérieur au nombre d'opérés" +
-                           " homme (" + surgery_m + ").";
+                           " hommes (" + surgery_m + ").";
             return false;
         }
-        // (femme)
+        // (femmes)
         if (recidivism_fe > surgery_fe) {
-            ErrorMessage = "[Erreur] Nombre de récidives femme (" + recidivism_fe +
+            ErrorMessage = "[Erreur] Nombre de récidives femmes (" + recidivism_fe +
                            ") ne peut être supérieur au nombre d'opérés" +
-                           " femme (" + surgery_fe + ").";
+                           " femmes (" + surgery_fe + ").";
             return false;
         }
 
         // opérés + refus <= consultés
-        // (Homme)
+        // (Hommes)
         if ((surgery_m + refusal_m) > consultation_m) {
             ErrorMessage = "[Erreur] La somme des opérés et refus hommes (" +
                             surgery_m + refusal_m +
-                           ") homme ne peut être supérieur au nombre de " +
-                           "consultés homme (" + consultation_m + ").";
+                           ") ne peut être supérieur au nombre de " +
+                           "consultés hommes (" + consultation_m + ").";
             return false;
         }
-        // (femme)
+        // (femmes)
         if ((surgery_fe + refusal_fe) > consultation_fe) {
             ErrorMessage = "[Erreur] La somme des opérés et refus femmes (" +
                             surgery_fe + refusal_fe +
                            ") ne peut être supérieur au nombre de " +
-                           "consultés femme (" + consultation_fe + ").";
+                           "consultés femmes (" + consultation_fe + ").";
             return false;
         }
         // Checks Dates
