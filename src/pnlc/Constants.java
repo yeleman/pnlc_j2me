@@ -22,7 +22,7 @@ public class Constants {
     public static final String END = "end";
     public static final String FIXED = "Fixe";
     public static final String MOBILE = "Mobile";
-    public static final String ADVANCED = "Avancé";
+    public static final String ADVANCED = "Avancée";
     public static final String FEMALE = " Femmes:";
     public static final String MALE = " Hommes:";
     public static final String HEAD_OF_MAINTENANCE = "l'ANTIM";
