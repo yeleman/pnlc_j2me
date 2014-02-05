@@ -24,7 +24,6 @@ public class MissionForm extends Form implements CommandListener {
     PNLCMIDlet midlet;
     Displayable returnTo;
     private String ErrorMessage = "";
-
     private Configuration config;
     private SMSStore store;
 
@@ -42,17 +41,20 @@ public class MissionForm extends Form implements CommandListener {
         this.midlet = midlet;
         config = new Configuration();
         store = new SMSStore();
+
+        String date_ = "Date de fin:";
+        if(this.midlet.mission.equals(Constants.START)){
+            date_ = "Date de debut:";
+            strategy = new ChoiceGroup("Strategie:", ChoiceGroup.POPUP, FMA, null);
+            append(strategy);
+        }
         // date
-        arrived_or_left_on =  new DateField("Date:", DateField.DATE, TimeZone.getTimeZone("GMT"));
+        arrived_or_left_on =  new DateField(date_, DateField.DATE, TimeZone.getTimeZone("GMT"));
         arrived_or_left_on.setDate(now);
         // text
         user_password = new TextField("Mot de passe:", null, 20, TextField.ANY);
 
         append(arrived_or_left_on);
-        if (this.midlet.mission.equals(Constants.START)){
-            strategy = new ChoiceGroup("Strategie:", ChoiceGroup.POPUP, FMA, null);
-            append(strategy);
-        }
         append(user_password);
 
         addCommand(CMD_EXIT);
