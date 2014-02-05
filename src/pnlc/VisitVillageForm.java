@@ -137,48 +137,92 @@ public class VisitVillageForm extends Form implements CommandListener {
     public boolean isValid() {
         ErrorMessage = "La date indiquée est dans le futur.";
 
-        int consultation = Integer.parseInt(consultation_male.getString()) +
-                           Integer.parseInt(consultation_female.getString());
-        int surgery = Integer.parseInt(surgery_male.getString()) +
-                      Integer.parseInt(surgery_female.getString());
-        int refusal = Integer.parseInt(refusal_male.getString()) +
-                      Integer.parseInt(refusal_female.getString());
-        int recidivism = Integer.parseInt(recidivism_male.getString()) +
-                         Integer.parseInt(recidivism_female.getString());
+        int consultation_m = Integer.parseInt(consultation_male.getString());
+        int consultation_fe = Integer.parseInt(consultation_female.getString());
+        int surgery_m = Integer.parseInt(surgery_male.getString());
+        int surgery_fe = Integer.parseInt(surgery_female.getString());
+        int refusal_m = Integer.parseInt(refusal_male.getString());
+        int refusal_fe = Integer.parseInt(refusal_female.getString());
+        int recidivism_m = Integer.parseInt(recidivism_male.getString());
+        int recidivism_fe = Integer.parseInt(recidivism_female.getString());
 
-        if (surgery > consultation) {
-            ErrorMessage = "[Erreur] Nombre total opérés (M + F) ne peut être " +
-                           "supérieur au nombre total consultés (M + F).";
+        // operés <= consulté
+        // (Homme)
+        if (surgery_m > consultation_m) {
+            ErrorMessage = "[Erreur] Nombre d'opérés homme (" +  surgery_m +
+                           ") ne peut être supérieur au nombre de " +
+                           "consultés homme (" + consultation_m + ").";
             return false;
         }
-        if (refusal > consultation) {
-            ErrorMessage = "[Erreur] Nombre total refus (M + F) ne peut être " +
-                           "supérieur au nombre total consultés (M + F).";
-            return false;
-        }
-        if (recidivism > consultation) {
-            ErrorMessage = "[Erreur] Nombre total récidives (M + F) ne peut " +
-                           "être supérieur au nombre total consultés (M + F).";
-            return false;
-        }
-
-        if ((surgery + refusal + recidivism) > consultation) {
-            ErrorMessage = "[Erreur] La somme des totaux des opérés, refus " +
-                           "et récidives ne peut être supérieur au nombre " +
-                           "total consultés.";
+         // (femme)
+        if (surgery_fe > consultation_fe) {
+            ErrorMessage =  "[Erreur] Nombre d'opérés femme (" +  surgery_fe +
+                           ") ne peut être supérieur au nombre de " +
+                           "consultés femme (" + consultation_fe + ").";
             return false;
         }
 
+        // refus <= consultés
+        // (Homme)
+        if (refusal_m > consultation_m) {
+            ErrorMessage = "[Erreur] Nombre de refus homme (" +  refusal_m +
+                           ") ne peut être supérieur au nombre de " +
+                           "consultés homme (" + consultation_m + ").";
+            return false;
+        }
+        // (femme)
+        if (refusal_fe > consultation_fe) {
+            ErrorMessage =  "[Erreur] Nombre de refus femme (" +  refusal_fe +
+                           ") ne peut être supérieur au nombre de " +
+                           "consultés femme (" + consultation_fe + ").";
+            return false;
+        }
+
+        // récidives <= opérés
+        // (Homme)
+        if (recidivism_m > surgery_m) {
+            ErrorMessage = "[Erreur] Nombre de récidives homme (" + recidivism_m +
+                           ") ne peut être supérieur au nombre d'opérés" +
+                           " homme (" + surgery_m + ").";
+            return false;
+        }
+        // (femme)
+        if (recidivism_fe > surgery_fe) {
+            ErrorMessage = "[Erreur] Nombre de récidives femme (" + recidivism_fe +
+                           ") ne peut être supérieur au nombre d'opérés" +
+                           " femme (" + surgery_fe + ").";
+            return false;
+        }
+
+        // opérés + refus <= consultés
+        // (Homme)
+        if ((surgery_m + refusal_m) > consultation_m) {
+            ErrorMessage = "[Erreur] La somme des opérés et refus hommes (" +
+                            surgery_m + refusal_m +
+                           ") homme ne peut être supérieur au nombre de " +
+                           "consultés homme (" + consultation_m + ").";
+            return false;
+        }
+        // (femme)
+        if ((surgery_fe + refusal_fe) > consultation_fe) {
+            ErrorMessage = "[Erreur] La somme des opérés et refus femmes (" +
+                            surgery_fe + refusal_fe +
+                           ") ne peut être supérieur au nombre de " +
+                           "consultés femme (" + consultation_fe + ").";
+            return false;
+        }
         // Checks Dates
+        // Date d'arrivée ne peut pas être dans le future.
         if (SharedChecks.isDateValide(arrived_on.getDate()) != true) {
             ErrorMessage = "[Date d'arrivée] " + ErrorMessage;
             return false;
         }
-
+        // Date de départ ne peut pas être dans le future.
         if (SharedChecks.isDateValide(left_on.getDate()) != true) {
             ErrorMessage = "[Date de départ] " + ErrorMessage;
             return false;
         }
+        // Date de départ ne peut pas être antérieure à la date d'arrivée.
         if (SharedChecks.compareleftarrived(arrived_on.getDate(),
                                             left_on.getDate()) == true) {
             ErrorMessage = "[Erreur] la date de départ ne peut pas être " +
