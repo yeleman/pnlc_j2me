@@ -282,7 +282,8 @@ public class VisitVillageForm extends Form implements CommandListener {
         int left_on_array[] = SharedChecks.formatDateString(left_on.getDate());
 
         return "[" + left_on_array[0] + sepa + left_on_array[1]
-                   + sepa + left_on_array[2] + "] " + locationField.getString(locationField.getSelectedIndex());
+                   + sepa + left_on_array[2] + "] "
+                   + locationField.getString(locationField.getSelectedIndex());
     }
 
     public void commandAction(Command c, Displayable d) {
@@ -299,34 +300,46 @@ public class VisitVillageForm extends Form implements CommandListener {
 
         if (c == CMD_CONTINUE) {
             health_center_code = snisi.entities.Utils.hcenters_codes(district_code)[health_centerField.getSelectedIndex()];
-            System.out.println("district_code: " + district_code);
-            System.out.println("health_center_code: " + health_center_code);
+            // System.out.println("district_code: " + district_code);
+            // System.out.println("health_center_code: " + health_center_code);
             locationField = new ChoiceGroup("Village:",ChoiceGroup.POPUP,
                                             snisi.entities.Utils.villages_names(district_code,
                                             health_center_code), null);
+            try{
+                locationField.getString(MAX_SIZE);
+                append(locationField);
+                append("Nb consultés");
+                append(consultation_male);
+                append(consultation_female);
+                append("Nb opérés");
+                append(surgery_male);
+                append(surgery_female);
+                append("Nb refus");
+                append(refusal_male);
+                append(refusal_female);
+                append("Nb récidives");
+                append(recidivism_male);
+                append(recidivism_female);
+                append(commutity_assistance);
+                append("Dates :");
+                append(arrived_on);
+                append(left_on);
+                append(user_password);
+                removeCommand(CMD_CONTINUE);
+                addCommand(CMD_SEND);
 
-            append(locationField);
-            append("Nb consultés");
-            append(consultation_male);
-            append(consultation_female);
-            append("Nb opérés");
-            append(surgery_male);
-            append(surgery_female);
-            append("Nb refus");
-            append(refusal_male);
-            append(refusal_female);
-            append("Nb récidives");
-            append(recidivism_male);
-            append(recidivism_female);
-            append(commutity_assistance);
-            append("Dates :");
-            append(arrived_on);
-            append(left_on);
-            append(user_password);
-            removeCommand(CMD_CONTINUE);
-            addCommand(CMD_SEND);
+            }catch (Exception e) {
+                Alert alert;
+                alert = new Alert("Village non trouver", "Aucun village n'a "
+                                  + "été trouvé pour l'aire de santé de "
+                                  + snisi.entities.Utils.hcenters_names(district_code)[health_centerField.getSelectedIndex()]
+                                  + ".", null,
+                                   AlertType.INFO);
+                alert.setTimeout(Alert.FOREVER);
+                this.midlet.display.setCurrent (alert, this);
+                return;
+            }
         }
-
         // save command
         if (c == CMD_SEND) {
             Alert alert;

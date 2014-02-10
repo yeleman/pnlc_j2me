@@ -14,7 +14,7 @@ public class Constants {
 
     public static final char CLEANER = '¥';
 
-    public static final String version = "0.3";
+    public static final String version = "0.4b";
     public static final String server_number = "70062552";
     public static final String OUI = "Oui";
     public static final String NON = "Non";
