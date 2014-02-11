@@ -306,7 +306,7 @@ public class VisitVillageForm extends Form implements CommandListener {
                                             snisi.entities.Utils.villages_names(district_code,
                                             health_center_code), null);
             try{
-                locationField.getString(MAX_SIZE);
+                locationField.getString(0);
                 append(locationField);
                 append("Nb consultés");
                 append(consultation_male);
