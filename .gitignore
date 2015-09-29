@@ -2,3 +2,4 @@ build/*
 *~
 *.orig
 .DS_Store
+dist/

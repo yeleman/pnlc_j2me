@@ -43,7 +43,8 @@ public class HelpForm extends Form implements CommandListener {
                    "Un SMS non envoyé est sauvegardé dans <<Renvoi form>>.";
 
         } else if (section.equalsIgnoreCase("version")) {
-            text = "PNLC - Version " + Constants.version;
+            String msg = "\n\n+ Formulaire CT \n+ Formulaire resultat CT";
+            text = "PNLC - Version " + Constants.version + msg;
 
         } else if (section.equalsIgnoreCase("Mission")) {
             text = "Ce formulaire permet de déclarer le début ou la fin de "+
@@ -61,6 +62,15 @@ public class HelpForm extends Form implements CommandListener {
 
         } else if (section.equalsIgnoreCase("saved_reports")) {
             text = "Vous pouvez envoyer tous les SMS à la fois ou le faire un à un.";
+
+        } else if (section.equalsIgnoreCase("result")) {
+            text = "Id CT : C'est le code reçu du serveur après l'envoi d'un CT.\n" +
+                   "Le resultat une liste 1 à 10 désignant l'acuité visuelle";
+
+        } else if (section.equalsIgnoreCase("visite_health_center")) {
+            text = "Renseignez les champs et envoyez.\n"+
+                   "Vous recevrez un SMS du serveur confirmant avec un id CT"+
+                   "a noté sur le formulaire CT.";
 
         } else if (section.equalsIgnoreCase("passwd")) {
             text = "Renseignez votre ancien mot de passe dans les champs adéquat.\n" +
