@@ -44,8 +44,8 @@ public class PNLCMIDlet extends MIDlet implements CommandListener {
         config = new Configuration();
         SMSStore store = new SMSStore();
 
-        String[] mainMenu_ = {"Début Mission", "Formulaire TT", "Formulaire CT",
-                              "Resultat CT", "Fin Mission", "Renvoi form. (" +
+        String[] mainMenu_ = {"Début Mission", "Formulaire TT", "Chirugie CAT",
+                              "Resultat CAT", "Fin Mission", "Renvoi form. (" +
                               store.count() + ")"};
 
         if(config.get("user_name").equals("")){

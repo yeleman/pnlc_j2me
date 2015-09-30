@@ -23,6 +23,8 @@ import snisi.entities.EntityHashTableG272;
 
 import snisi.entities.EntityHashTableZWT5;
 
+import snisi.entities.EntityHashTableX922;
+
 
 /**
  * List of static codes and names for Entities/Locations
@@ -64,6 +66,8 @@ public class StaticCodes {
         r4JN7.children_names.put("G272", "NARA");
         
         r4JN7.children_names.put("ZWT5", "OUELESSEBOUGOU");
+        
+        r4JN7.children_names.put("X922", "KALABAN KORO");
         
         
     }

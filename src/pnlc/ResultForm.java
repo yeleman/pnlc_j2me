@@ -30,14 +30,14 @@ public class ResultForm extends Form implements CommandListener {
     private Configuration config;
     private SMSStore store;
     private TextField user_password;
-    private TextField idField;
+    private TextField num_chirugyField;
     private ChoiceGroup avField;
     private DateField result_dateField;
 
     Date now = new Date();
     
     public ResultForm(PNLCMIDlet midlet) {
-        super("Result");
+        super("Result CAT");
         this.midlet = midlet;
         config = new Configuration();
         store = new SMSStore();
@@ -45,10 +45,10 @@ public class ResultForm extends Form implements CommandListener {
         result_dateField =  new DateField("Date opération:", DateField.DATE, TimeZone.getTimeZone("GMT"));
         result_dateField.setDate(now);
         user_password = new TextField("Mot de passe:", null, 20, TextField.ANY);
-        idField = new TextField("Id CT:", null, MAX_SIZE, TextField.ANY);
-        avField = new ChoiceGroup("Résultat:", ChoiceGroup.POPUP, AV, null);
+        num_chirugyField = new TextField("Num. chirugie:", null, MAX_SIZE, TextField.ANY);
+        avField = new ChoiceGroup("Acuité visuelle:", ChoiceGroup.POPUP, AV, null);
         append(result_dateField);
-        append(idField);
+        append(num_chirugyField);
         append(avField);
         append(user_password);
 
@@ -63,7 +63,7 @@ public class ResultForm extends Form implements CommandListener {
         if (user_password.getString().length() == 0) {
             return false;
         }
-        if (idField.getString().length() == 0) {
+        if (num_chirugyField.getString().length() == 0) {
             return false;
         }
         return true;
@@ -94,9 +94,13 @@ public class ResultForm extends Form implements CommandListener {
         message = user_name.replace(' ', Constants.CLEANER)
                   + sep + user_password.getString().replace(' ', Constants.CLEANER)
                   + sep + str_result_date
-                  + sep + idField.getString()
+                  + sep + num_chirugyField.getString()
                   + sep + avField.getString(avField.getSelectedIndex());
-        return "ct result" + sep + message;
+        //sms: cat result user_password result_date num_chirugy av
+        //example: cat result fad mypass 20150930 HA33 3
+        return Constants.KEY_CAT
+                 + sep +"result"
+                 + sep + message;
     }
 
     public void commandAction(Command c, Displayable d) {
@@ -152,6 +156,7 @@ public class ResultForm extends Form implements CommandListener {
         int result_date_array[] = SharedChecks.formatDateString(result_dateField.getDate());
         return "[" + result_date_array[0]  + sep_date +
                      result_date_array[1] + sep_date +
-                     result_date_array[2] +"] resultat pour id : " + idField.getString();
+                     result_date_array[2] +"] resultat pour id : " 
+                   + num_chirugyField.getString();
     }
 }

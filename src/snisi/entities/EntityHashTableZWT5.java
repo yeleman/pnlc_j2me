@@ -22,71 +22,17 @@ public class EntityHashTableZWT5 extends EntityHashTable {
         EntityHashTable hZ4622 = new EntityHashTable("Z4622", "OUELESSEBOUGOU CSREF");
 
         
-        EntityHashTable v25053089 = new EntityHashTable("25053089", "BILADIE");
-		hZ4622.children.addElement(v25053089);
-       	
-        EntityHashTable v25053199 = new EntityHashTable("25053199", "DIALAKORO-DJITOUMOU");
-		hZ4622.children.addElement(v25053199);
-       	
-        EntityHashTable v25053309 = new EntityHashTable("25053309", "DONGORONA");
-		hZ4622.children.addElement(v25053309);
-       	
-        EntityHashTable v25053375 = new EntityHashTable("25053375", "FEREKOROBA");
-		hZ4622.children.addElement(v25053375);
-       	
-        EntityHashTable v25053463 = new EntityHashTable("25053463", "KORONA");
-		hZ4622.children.addElement(v25053463);
-       	
-        EntityHashTable v25053485 = new EntityHashTable("25053485", "MANA");
-		hZ4622.children.addElement(v25053485);
-       	
-        EntityHashTable v25053551 = new EntityHashTable("25053551", "MORODIAMBOUGOU");
-		hZ4622.children.addElement(v25053551);
-       	
-        EntityHashTable v25053573 = new EntityHashTable("25053573", "M'PANA");
-		hZ4622.children.addElement(v25053573);
-       	
-        EntityHashTable v25053595 = new EntityHashTable("25053595", "M'PIEBOUGOU");
-		hZ4622.children.addElement(v25053595);
-       	
-        EntityHashTable v25053639 = new EntityHashTable("25053639", "N'KOROBOUGOU");
-		hZ4622.children.addElement(v25053639);
-       	
-        EntityHashTable v25053661 = new EntityHashTable("25053661", "N'TENTOUBOUGOU");
-		hZ4622.children.addElement(v25053661);
-       	
         EntityHashTable v25053683 = new EntityHashTable("25053683", "N'TENTOUKORO");
 		hZ4622.children.addElement(v25053683);
        	
         EntityHashTable v25053705 = new EntityHashTable("25053705", "OUELESSEBOUGOU");
 		hZ4622.children.addElement(v25053705);
        	
-        EntityHashTable v25053727 = new EntityHashTable("25053727", "SEGESSONA");
-		hZ4622.children.addElement(v25053727);
-       	
         EntityHashTable v25053749 = new EntityHashTable("25053749", "SIKORO-DJITOUMOU");
 		hZ4622.children.addElement(v25053749);
        	
-        EntityHashTable v25053771 = new EntityHashTable("25053771", "SIMIDJI");
-		hZ4622.children.addElement(v25053771);
-       	
-        EntityHashTable v25053793 = new EntityHashTable("25053793", "SOUGOULA");
-		hZ4622.children.addElement(v25053793);
-       	
-        EntityHashTable v25053815 = new EntityHashTable("25053815", "SOUNSOUKORO");
-		hZ4622.children.addElement(v25053815);
-       	
-        EntityHashTable v25053837 = new EntityHashTable("25053837", "TAMALA");
-		hZ4622.children.addElement(v25053837);
-       	
-        EntityHashTable v25053859 = new EntityHashTable("25053859", "TENEMABOUGOU");
-		hZ4622.children.addElement(v25053859);
-       	
         EntityHashTable v25053903 = new EntityHashTable("25053903", "ZAMBOUGOU DJITOUMOU");
 		hZ4622.children.addElement(v25053903);
-       	
-        EntityHashTable v25053969 = new EntityHashTable("25053969", "ZIELANI");
-		hZ4622.children.addElement(v25053969);
        	
         EntityHashTable v25053420 = new EntityHashTable("25053420", "KERSSANA");
 		hZ4622.children.addElement(v25053420);
@@ -115,6 +61,78 @@ public class EntityHashTableZWT5 extends EntityHashTable {
         EntityHashTable hZEPM8 = new EntityHashTable("ZEPM8", "ASACOOUEL (OUELESSEBOUGOU CENTRAL)");
 
         
+        EntityHashTable v25013001 = new EntityHashTable("25013001", "BAGA");
+		hZEPM8.children.addElement(v25013001);
+       	
+        EntityHashTable v25013517 = new EntityHashTable("25013517", "LENA");
+		hZEPM8.children.addElement(v25013517);
+       	
+        EntityHashTable v25013646 = new EntityHashTable("25013646", "MANABOUGOU");
+		hZEPM8.children.addElement(v25013646);
+       	
+        EntityHashTable v25013689 = new EntityHashTable("25013689", "MOLOBALA");
+		hZEPM8.children.addElement(v25013689);
+       	
+        EntityHashTable v25027250 = new EntityHashTable("25027250", "DAGABO");
+		hZEPM8.children.addElement(v25027250);
+       	
+        EntityHashTable v25053089 = new EntityHashTable("25053089", "BILADIE");
+		hZEPM8.children.addElement(v25053089);
+       	
+        EntityHashTable v25053199 = new EntityHashTable("25053199", "DIALAKORO-DJITOUMOU");
+		hZEPM8.children.addElement(v25053199);
+       	
+        EntityHashTable v25053309 = new EntityHashTable("25053309", "DONGORONA");
+		hZEPM8.children.addElement(v25053309);
+       	
+        EntityHashTable v25053375 = new EntityHashTable("25053375", "FEREKOROBA");
+		hZEPM8.children.addElement(v25053375);
+       	
+        EntityHashTable v25053463 = new EntityHashTable("25053463", "KORONA");
+		hZEPM8.children.addElement(v25053463);
+       	
+        EntityHashTable v25053485 = new EntityHashTable("25053485", "MANA");
+		hZEPM8.children.addElement(v25053485);
+       	
+        EntityHashTable v25053551 = new EntityHashTable("25053551", "MORODIAMBOUGOU");
+		hZEPM8.children.addElement(v25053551);
+       	
+        EntityHashTable v25053573 = new EntityHashTable("25053573", "M'PANA");
+		hZEPM8.children.addElement(v25053573);
+       	
+        EntityHashTable v25053595 = new EntityHashTable("25053595", "M'PIEBOUGOU");
+		hZEPM8.children.addElement(v25053595);
+       	
+        EntityHashTable v25053639 = new EntityHashTable("25053639", "N'KOROBOUGOU");
+		hZEPM8.children.addElement(v25053639);
+       	
+        EntityHashTable v25053661 = new EntityHashTable("25053661", "N'TENTOUBOUGOU");
+		hZEPM8.children.addElement(v25053661);
+       	
+        EntityHashTable v25053727 = new EntityHashTable("25053727", "SEGESSONA");
+		hZEPM8.children.addElement(v25053727);
+       	
+        EntityHashTable v25053771 = new EntityHashTable("25053771", "SIMIDJI");
+		hZEPM8.children.addElement(v25053771);
+       	
+        EntityHashTable v25053793 = new EntityHashTable("25053793", "SOUGOULA");
+		hZEPM8.children.addElement(v25053793);
+       	
+        EntityHashTable v25053815 = new EntityHashTable("25053815", "SOUNSOUKORO");
+		hZEPM8.children.addElement(v25053815);
+       	
+        EntityHashTable v25053837 = new EntityHashTable("25053837", "TAMALA");
+		hZEPM8.children.addElement(v25053837);
+       	
+        EntityHashTable v25053859 = new EntityHashTable("25053859", "TENEMABOUGOU");
+		hZEPM8.children.addElement(v25053859);
+       	
+        EntityHashTable v25053925 = new EntityHashTable("25053925", "ZAMBOUGOU-DIONKALAN");
+		hZEPM8.children.addElement(v25053925);
+       	
+        EntityHashTable v25053969 = new EntityHashTable("25053969", "ZIELANI");
+		hZEPM8.children.addElement(v25053969);
+       	
 
         this.children.addElement(hZEPM8);
         
@@ -151,6 +169,9 @@ public class EntityHashTableZWT5 extends EntityHashTable {
         EntityHashTable hZJYP7 = new EntityHashTable("ZJYP7", "BENEKO");
 
         
+        EntityHashTable v25049229 = new EntityHashTable("25049229", "DIANIKORO");
+		hZJYP7.children.addElement(v25049229);
+       	
         EntityHashTable v25053001 = new EntityHashTable("25053001", "BAGAYOKOBOUGOU");
 		hZJYP7.children.addElement(v25053001);
        	
@@ -244,6 +265,9 @@ public class EntityHashTableZWT5 extends EntityHashTable {
         EntityHashTable v25013676 = new EntityHashTable("25013676", "KARACO");
 		hZA8F4.children.addElement(v25013676);
        	
+        EntityHashTable v25053507 = new EntityHashTable("25053507", "MARAKO");
+		hZA8F4.children.addElement(v25053507);
+       	
 
         this.children.addElement(hZA8F4);
         
@@ -264,9 +288,6 @@ public class EntityHashTableZWT5 extends EntityHashTable {
        	
         EntityHashTable v25053331 = new EntityHashTable("25053331", "FANICODIALAN");
 		hZAAE5.children.addElement(v25053331);
-       	
-        EntityHashTable v25053925 = new EntityHashTable("25053925", "ZAMBOUGOU-DIONKALAN");
-		hZAAE5.children.addElement(v25053925);
        	
         EntityHashTable v25053499 = new EntityHashTable("25053499", "DOGOTOU");
 		hZAAE5.children.addElement(v25053499);
@@ -300,6 +321,12 @@ public class EntityHashTableZWT5 extends EntityHashTable {
        	
         EntityHashTable v25057169 = new EntityHashTable("25057169", "DARAKORO");
 		hZHAH3.children.addElement(v25057169);
+       	
+        EntityHashTable v25057966 = new EntityHashTable("25057966", "WARMADIANA");
+		hZHAH3.children.addElement(v25057966);
+       	
+        EntityHashTable v25057967 = new EntityHashTable("25057967", "SIRAMANA");
+		hZHAH3.children.addElement(v25057967);
        	
 
         this.children.addElement(hZHAH3);
@@ -343,6 +370,9 @@ public class EntityHashTableZWT5 extends EntityHashTable {
         EntityHashTable hZ86R5 = new EntityHashTable("Z86R5", "SAFE BOUGOULA");
 
         
+        EntityHashTable v25007361 = new EntityHashTable("25007361", "KARAKO");
+		hZ86R5.children.addElement(v25007361);
+       	
         EntityHashTable v25069077 = new EntityHashTable("25069077", "BOUGOULA");
 		hZ86R5.children.addElement(v25069077);
        	
@@ -486,6 +516,9 @@ public class EntityHashTableZWT5 extends EntityHashTable {
        	
         EntityHashTable v25067809 = new EntityHashTable("25067809", "DJIGUIMBALY");
 		hZX7G0.children.addElement(v25067809);
+       	
+        EntityHashTable v25067890 = new EntityHashTable("25067890", "MANIAGA");
+		hZX7G0.children.addElement(v25067890);
        	
 
         this.children.addElement(hZX7G0);

@@ -26,7 +26,12 @@ public class Constants {
     public static final String FEMALE = " Femmes:";
     public static final String MALE = " Hommes:";
     public static final String HEAD_OF_MAINTENANCE = "l'ANTIM";
-    public static final String OG = "OG";
-    public static final String OD = "OD";
+    public static final String OG = "Gauche";
+    public static final String OD = "Droite";
+    public static final String KEY_TT = "tt";
+    public static final String KEY_CAT = "cat";
+    public static final String CAT = "Cataracte";
+    public static final String TT = "Trachoma";
+
 
 }

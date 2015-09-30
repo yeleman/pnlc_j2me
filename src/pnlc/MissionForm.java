@@ -30,7 +30,9 @@ public class MissionForm extends Form implements CommandListener {
     //Mission
     private DateField arrived_or_left_on;
     private static final String[] FMA = {Constants.MOBILE, Constants.ADVANCED, Constants.FIXED};
+    private static final String[] TYPE = {Constants.TT, Constants.CAT};
     private TextField user_password;
+    private ChoiceGroup typeField;
     private ChoiceGroup strategy;
 
     Date now = new Date();
@@ -48,12 +50,15 @@ public class MissionForm extends Form implements CommandListener {
             strategy = new ChoiceGroup("Strategie:", ChoiceGroup.POPUP, FMA, null);
             append(strategy);
         }
+
+        typeField = new ChoiceGroup("type:", ChoiceGroup.POPUP, TYPE, null);
         // date
         arrived_or_left_on =  new DateField(date_, DateField.DATE, TimeZone.getTimeZone("GMT"));
         arrived_or_left_on.setDate(now);
         // text
         user_password = new TextField("Mot de passe:", null, 20, TextField.ANY);
 
+        append(typeField);
         append(arrived_or_left_on);
         append(user_password);
 
@@ -107,10 +112,17 @@ public class MissionForm extends Form implements CommandListener {
                 type_strategy = "mobile";
             if (strategy.getString(strategy.getSelectedIndex()).equals(Constants.ADVANCED))
                 type_strategy = "advanced";
-            message = message + sep + operator_type+ sep + type_strategy;
+            message = message + sep + operator_type + sep + type_strategy;
         }
-
-       return "tt" + sep + mission + sep + message;
+        String key = Constants.KEY_CAT;
+        if (typeField.getString(typeField.getSelectedIndex()).equals(Constants.TT)){
+            key = Constants.KEY_TT;
+        }
+        //SMS Text: tt or cat start user_name user_password district_code arrived_or_left operator_type strategy
+        //example: tt start FAD mypass G272 20150930 AMO mobile
+        //SMS Text: tt or cat end user_name user_password district_code arrived_or_left operator_type strategy
+        //example: ct end FAD mypass G272 20150930 AMO mobile
+        return key + sep + mission + sep + message;
     }
 
     public String toText() {

@@ -260,29 +260,32 @@ public class VisitVillageForm extends Form implements CommandListener {
         // village location
         village_code = snisi.entities.Utils.villages_codes(district_code,
                                                            health_center_code)[locationField.getSelectedIndex()];
-
-        return "tt visit" + sep + user_name.replace(' ', Constants.CLEANER)
-                          + sep + user_password.getString().replace(' ', Constants.CLEANER)
-                          + sep + village_code
-                          + sep + consultation_male.getString()
-                          + sep + consultation_female.getString()
-                          + sep + surgery_male.getString()
-                          + sep + surgery_female.getString()
-                          + sep + refusal_male.getString()
-                          + sep + refusal_female.getString()
-                          + sep + recidivism_male.getString()
-                          + sep + recidivism_female.getString()
-                          + sep + relay
-                          + sep + arrived_on_d
-                          + sep + left_on_d;
+        //SMS Text: tt start user_name user_password village_code 20150930 AMO mobile
+        //example: tt start FAD mypass G272 20150930 AMO mobile
+        return Constants.KEY_TT + sep + "visit"
+                                + sep + user_name.replace(' ', Constants.CLEANER)
+                                + sep + user_password.getString().replace(' ', Constants.CLEANER)
+                                + sep + village_code
+                                + sep + consultation_male.getString()
+                                + sep + consultation_female.getString()
+                                + sep + surgery_male.getString()
+                                + sep + surgery_female.getString()
+                                + sep + refusal_male.getString()
+                                + sep + refusal_female.getString()
+                                + sep + recidivism_male.getString()
+                                + sep + recidivism_female.getString()
+                                + sep + relay
+                                + sep + arrived_on_d
+                                + sep + left_on_d;
     }
 
     public String toText() {
-        String sepa = "-";
+        String sep_date = "-";
         int left_on_array[] = SharedChecks.formatDateString(left_on.getDate());
 
-        return "[" + left_on_array[0] + sepa + left_on_array[1]
-                   + sepa + left_on_array[2] + "] "
+        return "[" + left_on_array[0] + sep_date +
+                     left_on_array[1] + sep_date +
+                     left_on_array[2] + "] "
                    + locationField.getString(locationField.getSelectedIndex());
     }
 

@@ -36,7 +36,7 @@ public class VisitHealthCenterForm extends Form implements CommandListener {
     private TextField ageField;
     private ChoiceGroup health_centerField;
     private ChoiceGroup eyeField;
-    private ChoiceGroup sexeField;
+    private ChoiceGroup sexField;
     private DateField operation_date;
 
     Date now = new Date();
@@ -62,7 +62,7 @@ public class VisitHealthCenterForm extends Form implements CommandListener {
         user_password = new TextField("Mot de passe:", null, 20, TextField.ANY);
         ageField = new TextField("Age:", null, 4, TextField.DECIMAL);
         eyeField = new ChoiceGroup("Oeil:", ChoiceGroup.POPUP, EYE, null);
-        sexeField = new ChoiceGroup("Sexe:", ChoiceGroup.POPUP, SEXE, null);
+        sexField = new ChoiceGroup("Sexe:", ChoiceGroup.POPUP, SEXE, null);
 
         //date
         operation_date =  new DateField("Date opération:", DateField.DATE, TimeZone.getTimeZone("GMT"));
@@ -74,7 +74,7 @@ public class VisitHealthCenterForm extends Form implements CommandListener {
 
         append(health_centerField);
         append(operation_date);
-        append(sexeField);
+        append(sexField);
         append(eyeField);
         append(ageField);
         append(user_password);
@@ -123,19 +123,23 @@ public class VisitHealthCenterForm extends Form implements CommandListener {
                 district_code)[health_centerField.getSelectedIndex()];
 
         int operation_date_array[] = SharedChecks.formatDateString(operation_date.getDate());
-        String str_operation_date = String.valueOf(operation_date_array[2])
+        String operation_date_str = String.valueOf(operation_date_array[2])
                              + SharedChecks.addzero(operation_date_array[1])
                              + SharedChecks.addzero(operation_date_array[0]);
-
-        //SMS Text: ct visit Fad TTTT Z7R24 20150928 55 M OD
-        return "ct visit" + sep +
-               user_name.replace(' ', Constants.CLEANER) + sep +
-               user_password.getString().replace(' ', Constants.CLEANER) + sep +
-               health_center_code + sep +
-               str_operation_date + sep +
-               sexeField.getString(sexeField.getSelectedIndex()) + sep +
-               eyeField.getString(eyeField.getSelectedIndex()) + sep +
-               ageField.getString();
+        String eye = "left";
+        if (eyeField.getString(eyeField.getSelectedIndex()).equals(Constants.OD)){
+                eye = "right";
+        }
+        //SMS Text: ct visit user_name user_password health_center_code operation_date sex eye age
+        //example: ct visit Fad mypass Z7R24 20150928 M right 55
+        return Constants.KEY_CAT + sep + "visit"
+                                 + sep + user_name.replace(' ', Constants.CLEANER)
+                                 + sep + user_password.getString().replace(' ', Constants.CLEANER)
+                                 + sep + health_center_code
+                                 + sep + operation_date_str
+                                 + sep + sexField.getString(sexField.getSelectedIndex())
+                                 + sep + eye
+                                 + sep + ageField.getString();
     }
 
     public String toText() {
@@ -144,8 +148,8 @@ public class VisitHealthCenterForm extends Form implements CommandListener {
 
         return "[" + operation_date_array[0]  + sep_date +
                      operation_date_array[1] + sep_date +
-                     operation_date_array[2] + "] visite air " + sep +
-                     health_centerField.getString(health_centerField.getSelectedIndex()) ;
+                     operation_date_array[2] + "] visite air "
+                   + health_centerField.getString(health_centerField.getSelectedIndex()) ;
     }
 
     public void commandAction(Command c, Displayable d) {
