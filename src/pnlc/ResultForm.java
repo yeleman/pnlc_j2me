@@ -96,8 +96,10 @@ public class ResultForm extends Form implements CommandListener {
                   + sep + str_result_date
                   + sep + num_chirugyField.getString()
                   + sep + avField.getString(avField.getSelectedIndex());
-        //sms: cat result user_password result_date num_chirugy av
-        //example: cat result fad mypass 20150930 HA33 3
+        
+        /** sms : cat result user_password result_date num_chirugy av
+            example: cat result fad mypass 20150930 HA33 3
+        **/
         return Constants.KEY_CAT
                  + sep +"result"
                  + sep + message;

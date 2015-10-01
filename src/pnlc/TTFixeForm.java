@@ -1,38 +1,35 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package pnlc;
+
 
 import javax.microedition.lcdui.*;
 import java.util.TimeZone;
 import pnlc.Configuration.*;
 import pnlc.Constants.*;
-import snisi.entities.Utils.*;
-import pnlc.SharedChecks.*;
 import java.util.Date;
-
 /**
- * J2ME Form displaying a long help text
- * Instanciated with a section paramater
- * which triggers appropriate text.
- * @author Fad
+ *
+ * @author fad
  */
+public class TTFixeForm extends Form implements CommandListener {
 
-public class VisitVillageForm extends Form implements CommandListener {
-
+    
     private static final Command CMD_EXIT = new Command ("Retour",  Command.BACK, 1);
     private static final Command CMD_SEND = new Command ("Envoi.", Command.OK, 1);
     private static final Command CMD_HELP = new Command ("Aide", Command.HELP, 2);
-    private static final Command CMD_CONTINUE = new Command ("Continuer", Command.HELP, 2);
 
-
-    PNLCMIDlet midlet;
+    private PNLCMIDlet midlet;
     Displayable returnTo;
+
 
     private String ErrorMessage = "";
     private static final int MAX_SIZE = 4;
-
     private Configuration config;
     private SMSStore store;
-
-    //register
     private TextField user_password;
     private TextField consultation_male;
     private TextField consultation_female;
@@ -42,31 +39,23 @@ public class VisitVillageForm extends Form implements CommandListener {
     private TextField refusal_female;
     private TextField recidivism_male;
     private TextField recidivism_female;
-    private static final String[] YesNon = {Constants.NON, Constants.OUI};
-    private ChoiceGroup commutity_assistance;
-    private DateField arrived_on;
-    private DateField left_on;
-    private ChoiceGroup locationField;
-    private ChoiceGroup health_centerField;
+    private DateField operation_date;
 
     Date now = new Date();
     String sep = " ";
     String region_code;
     String district_code;
-    String last_health_center;
-    String health_center_code;
-    String village_code;
-
-    public VisitVillageForm(PNLCMIDlet midlet) {
-        super("Visite village");
+    
+    
+    public TTFixeForm(PNLCMIDlet midlet) {
+        super("Fixe TT");
         this.midlet = midlet;
 
         config = new Configuration();
         store = new SMSStore();
-
+        
         region_code = config.get("region_code");
         district_code = config.get("district_code");
-        last_health_center = config.get("last_health_center");
 
         //Text
         user_password = new TextField("Mot de passe:", null, 20, TextField.ANY);
@@ -80,55 +69,44 @@ public class VisitVillageForm extends Form implements CommandListener {
         recidivism_female = new TextField(Constants.FEMALE, null, MAX_SIZE, TextField.DECIMAL);
 
         //date
-        arrived_on =  new DateField(" arrivée:", DateField.DATE, TimeZone.getTimeZone("GMT"));
-        arrived_on.setDate(now);
-        left_on =  new DateField(" départ:", DateField.DATE, TimeZone.getTimeZone("GMT"));
-        left_on.setDate(now);
-        health_centerField = new ChoiceGroup("Aire de santé:",
-                                             ChoiceGroup.POPUP,
-                                             snisi.entities.Utils.hcenters_names(district_code), null);
-        health_centerField.setSelectedIndex(Integer.parseInt(last_health_center), true);
+        operation_date =  new DateField("Date opération:", DateField.DATE, TimeZone.getTimeZone("GMT"));
+        operation_date.setDate(now);
 
-        //choice
-        commutity_assistance = new ChoiceGroup("Aide du relais:", ChoiceGroup.POPUP, YesNon, null);
-        append(health_centerField);
+        append(operation_date);
+        append("Nb consultés");
+        append(consultation_male);
+        append(consultation_female);
+        append("Nb opérés");
+        append(surgery_male);
+        append(surgery_female);
+        append("Nb refus");
+        append(refusal_male);
+        append(refusal_female);
+        append("Nb récidives");
+        append(recidivism_male);
+        append(recidivism_female);
+        append(user_password);
 
-
-        addCommand(CMD_CONTINUE);
+        addCommand(CMD_SEND);
         addCommand(CMD_EXIT);
         addCommand(CMD_HELP);
 
         this.setCommandListener (this);
+
     }
-
-    public boolean isComplete() {
-
+    public boolean isComplete(){
+        
         // all fields are required to be filled.
-        if (user_password.getString().length() == 0) {
-            return false;
-        }
-        if (consultation_male.getString().length() == 0) {
-            return false;
-        }
-        if (consultation_female.getString().length() == 0) {
-            return false;
-        }
-        if (surgery_male.getString().length() == 0) {
-            return false;
-        }
-        if (surgery_female.getString().length() == 0) {
-            return false;
-        }
-        if (refusal_male.getString().length() == 0) {
-            return false;
-        }
-        if (refusal_female.getString().length() == 0) {
-            return false;
-        }
-        if (recidivism_male.getString().length() == 0) {
-            return false;
-        }
-        if (recidivism_female.getString().length() == 0) {
+        if (user_password.getString().length() == 0 ||
+            user_password.getString().length() == 0 ||
+            consultation_male.getString().length() == 0 ||
+            consultation_female.getString().length() == 0 ||
+            surgery_male.getString().length() == 0 ||
+            surgery_female.getString().length() == 0 ||
+            refusal_male.getString().length() == 0 ||
+            refusal_female.getString().length() == 0 ||
+            recidivism_male.getString().length() == 0 ||
+            recidivism_female.getString().length() == 0) {
             return false;
         }
         return true;
@@ -213,65 +191,31 @@ public class VisitVillageForm extends Form implements CommandListener {
         }
         // Checks Dates
         // Date d'arrivée ne peut pas être dans le future.
-        if (SharedChecks.isDateValide(arrived_on.getDate()) != true) {
-            ErrorMessage = "[Date d'arrivée] " + ErrorMessage;
+        if (SharedChecks.isDateValide(operation_date.getDate()) != true) {
+            ErrorMessage = "[Date d'opération] " + ErrorMessage;
             return false;
         }
-        // Date de départ ne peut pas être dans le future.
-        if (SharedChecks.isDateValide(left_on.getDate()) != true) {
-            ErrorMessage = "[Date de départ] " + ErrorMessage;
-            return false;
-        }
-        // Date de départ ne peut pas être antérieure à la date d'arrivée.
-        if (SharedChecks.compareleftarrived(arrived_on.getDate(),
-                                            left_on.getDate()) == true) {
-            ErrorMessage = "[Erreur] la date de départ ne peut pas être " +
-                           "antérieure à la date d'arrivée.";
-            return false;
-        }
-
         return true;
     }
 
     public String toSMSFormat() {
-        int relay;
-
-        int arrived_on_array[] = SharedChecks.formatDateString(arrived_on.getDate());
-        String arrived_on_d = String.valueOf(arrived_on_array[2])
-                             + SharedChecks.addzero(arrived_on_array[1])
-                             + SharedChecks.addzero(arrived_on_array[0]);
-
-        int left_on_array[] = SharedChecks.formatDateString(left_on.getDate());
-        String left_on_d = String.valueOf(left_on_array[2])
-                             + SharedChecks.addzero(left_on_array[1])
-                             + SharedChecks.addzero(left_on_array[0]);
-
-        if (commutity_assistance.getString(
-                commutity_assistance.getSelectedIndex()).equals(Constants.OUI))
-            relay = 1;
-        else
-            relay = 0;
 
         String user_name = config.get("user_name");
-        String health_center_code_index = String.valueOf(health_centerField.getSelectedIndex());
 
-        // On sauvegarde l'index du centre de santé pour l'ulitiser par defaut après
-        config.set("last_health_center", health_center_code_index);
+        int operation_date_array[] = SharedChecks.formatDateString(operation_date.getDate());
+        String operation_date_str = String.valueOf(operation_date_array[2])
+                             + SharedChecks.addzero(operation_date_array[1])
+                             + SharedChecks.addzero(operation_date_array[0]);
+        
+        /**SMS Text: tt visit user_name user_password village_code
+                     consultation_male consultation_female surgery_male surgery_female
+                     refusal_male refusal_female recidivism_male operation_date
+        example:tt fixe fad hdjjd G272 00 0 0 0 0 00 0 0 20151001 **/
 
-        // village location
-        village_code = snisi.entities.Utils.villages_codes(
-                district_code, health_center_code)[locationField.getSelectedIndex()];
-        /** SMS Text: tt visit user_name user_password village_code
-                      consultation_male consultation_female surgery_male surgery_female
-                      refusal_male refusal_female recidivism_male recidivism_female
-         * relay arrived_on_d left_on_d
-           example: tt visit fad password 27065001 0 0 0 0 0 0 0 0 0 20151001 20151001
-         **/
-
-        return Constants.KEY_TT + sep + "visit"
+        return Constants.KEY_TT + sep + "fixe"
                                 + sep + user_name.replace(' ', Constants.CLEANER)
                                 + sep + user_password.getString().replace(' ', Constants.CLEANER)
-                                + sep + village_code
+                                + sep + district_code
                                 + sep + consultation_male.getString()
                                 + sep + consultation_female.getString()
                                 + sep + surgery_male.getString()
@@ -280,25 +224,22 @@ public class VisitVillageForm extends Form implements CommandListener {
                                 + sep + refusal_female.getString()
                                 + sep + recidivism_male.getString()
                                 + sep + recidivism_female.getString()
-                                + sep + relay
-                                + sep + arrived_on_d
-                                + sep + left_on_d;
+                                + sep + operation_date_str;
     }
 
     public String toText() {
         String sep_date = "-";
-        int left_on_array[] = SharedChecks.formatDateString(left_on.getDate());
+        int operation_date_array[] = SharedChecks.formatDateString(operation_date.getDate());
 
-        return "[" + left_on_array[0] + sep_date +
-                     left_on_array[1] + sep_date +
-                     left_on_array[2] + "] "
-                   + locationField.getString(locationField.getSelectedIndex());
+        return "[" + operation_date_array[0]  + sep_date +
+                     operation_date_array[1] + sep_date +
+                     operation_date_array[2] + "] TT fixe " + district_code ;
     }
 
     public void commandAction(Command c, Displayable d) {
         // help command displays Help Form.
         if (c == CMD_HELP) {
-            HelpForm h = new HelpForm(this.midlet, this, "visite_village");
+            HelpForm h = new HelpForm(this.midlet, this, "Trachoma_fixe");
             this.midlet.display.setCurrent(h);
         }
 
@@ -307,48 +248,6 @@ public class VisitVillageForm extends Form implements CommandListener {
             this.midlet.display.setCurrent(this.midlet.mainMenu);
         }
 
-        if (c == CMD_CONTINUE) {
-            health_center_code = snisi.entities.Utils.hcenters_codes(district_code)[health_centerField.getSelectedIndex()];
-            // System.out.println("district_code: " + district_code);
-            // System.out.println("health_center_code: " + health_center_code);
-            locationField = new ChoiceGroup("Village:",ChoiceGroup.POPUP,
-                                            snisi.entities.Utils.villages_names(district_code,
-                                            health_center_code), null);
-            try{
-                locationField.getString(0);
-                append(locationField);
-                append("Nb consultés");
-                append(consultation_male);
-                append(consultation_female);
-                append("Nb opérés");
-                append(surgery_male);
-                append(surgery_female);
-                append("Nb refus");
-                append(refusal_male);
-                append(refusal_female);
-                append("Nb récidives");
-                append(recidivism_male);
-                append(recidivism_female);
-                append(commutity_assistance);
-                append("Dates :");
-                append(arrived_on);
-                append(left_on);
-                append(user_password);
-                removeCommand(CMD_CONTINUE);
-                addCommand(CMD_SEND);
-
-            }catch (Exception e) {
-                Alert alert;
-                alert = new Alert("Village non trouver", "Aucun village n'a "
-                                  + "été trouvé pour l'aire de santé de "
-                                  + snisi.entities.Utils.hcenters_names(district_code)[health_centerField.getSelectedIndex()]
-                                  + ".", null,
-                                   AlertType.INFO);
-                alert.setTimeout(Alert.FOREVER);
-                this.midlet.display.setCurrent (alert, this);
-                return;
-            }
-        }
         // save command
         if (c == CMD_SEND) {
             Alert alert;
@@ -391,7 +290,6 @@ public class VisitVillageForm extends Form implements CommandListener {
                 this.midlet.startApp();
                 this.midlet.display.setCurrent (alert, this.midlet.mainMenu);
             }
-
         }
     }
 }

@@ -130,8 +130,10 @@ public class VisitHealthCenterForm extends Form implements CommandListener {
         if (eyeField.getString(eyeField.getSelectedIndex()).equals(Constants.OD)){
                 eye = "right";
         }
-        //SMS Text: ct visit user_name user_password health_center_code operation_date sex eye age
-        //example: ct visit Fad mypass Z7R24 20150928 M right 55
+        
+        /** SMS Text: ct visit user_name user_password health_center_code operation_date sex eye age
+            example: ct visit Fad mypass Z7R24 20150928 M right 55
+        **/
         return Constants.KEY_CAT + sep + "visit"
                                  + sep + user_name.replace(' ', Constants.CLEANER)
                                  + sep + user_password.getString().replace(' ', Constants.CLEANER)

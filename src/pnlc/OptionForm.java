@@ -25,8 +25,7 @@ public class OptionForm extends Form implements CommandListener {
 
     private Configuration config;
     private String[] regions;
-
-    private static final String[] TypeOp = {"AMO", "TSO", "OPT"};
+    private static final String[] TypeOp = {"AMO", "TSO", "OPT", Constants.SURGEON};
     private TextField numberField;
     private TextField user_nameField;
     //choice

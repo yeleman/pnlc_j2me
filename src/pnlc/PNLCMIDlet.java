@@ -44,8 +44,8 @@ public class PNLCMIDlet extends MIDlet implements CommandListener {
         config = new Configuration();
         SMSStore store = new SMSStore();
 
-        String[] mainMenu_ = {"Début Mission", "Formulaire TT", "Chirugie CAT",
-                              "Resultat CAT", "Fin Mission", "Renvoi form. (" +
+        String[] mainMenu_ = {"Début Mission", "Formulaire TT", "Formulaire TT fixe",
+                              "chirurgie CAT", "Resultat CAT", "Fin Mission", "Renvoi form. (" +
                               store.count() + ")"};
 
         if(config.get("user_name").equals("")){
@@ -91,22 +91,24 @@ public class PNLCMIDlet extends MIDlet implements CommandListener {
                     break;
                 // submit stored messages
                 case 2:
+                    TTFixeForm tt_fixe_form = new TTFixeForm(this);
+                    display.setCurrent (tt_fixe_form);
+                    break;
+                // submit stored messages
+                case 3:
                     VisitHealthCenterForm health_center_form = new VisitHealthCenterForm(this);
                     display.setCurrent (health_center_form);
                     break;
-                // End of the visit of a village
-                case 3:
+                case 4:
                     ResultForm result_form = new ResultForm(this);
                     display.setCurrent (result_form);
                     break;
-                // End of the visit of a village
-                case 4:
+                case 5:
                     this.mission = Constants.END;
                     MissionForm end_mission_form = new MissionForm(this);
                     display.setCurrent (end_mission_form);
                     break;
-                // End of the visit of a village
-                case 5:
+                case 6:
                     SendSavedReports saved_reports = new SendSavedReports(this);
                     display.setCurrent (saved_reports);
                     break;

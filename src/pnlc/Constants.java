@@ -14,7 +14,7 @@ public class Constants {
 
     public static final char CLEANER = '¥';
 
-    public static final String version = "1.0";
+    public static final String version = "2.0";
     public static final String server_number = "70062552";
     public static final String OUI = "Oui";
     public static final String NON = "Non";
@@ -24,6 +24,7 @@ public class Constants {
     public static final String MOBILE = "Mobile";
     public static final String ADVANCED = "Avancée";
     public static final String FEMALE = " Femmes:";
+    public static final String SURGEON = "Chirurgien";
     public static final String MALE = " Hommes:";
     public static final String HEAD_OF_MAINTENANCE = "l'ANTIM";
     public static final String OG = "Gauche";

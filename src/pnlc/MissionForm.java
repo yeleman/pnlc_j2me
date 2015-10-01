@@ -112,16 +112,20 @@ public class MissionForm extends Form implements CommandListener {
                 type_strategy = "mobile";
             if (strategy.getString(strategy.getSelectedIndex()).equals(Constants.ADVANCED))
                 type_strategy = "advanced";
+
+            if (operator_type.equals(Constants.SURGEON))
+                operator_type = "surgeon";
             message = message + sep + operator_type + sep + type_strategy;
         }
         String key = Constants.KEY_CAT;
         if (typeField.getString(typeField.getSelectedIndex()).equals(Constants.TT)){
             key = Constants.KEY_TT;
         }
-        //SMS Text: tt or cat start user_name user_password district_code arrived_or_left operator_type strategy
-        //example: tt start FAD mypass G272 20150930 AMO mobile
-        //SMS Text: tt or cat end user_name user_password district_code arrived_or_left operator_type strategy
-        //example: ct end FAD mypass G272 20150930 AMO mobile
+        /** SMS Text: tt or cat start user_name user_password district_code arrived_or_left operator_type strategy
+            example: tt start FAD mypass G272 20150930 AMO mobile
+            SMS Text: tt or cat end user_name user_password district_code arrived_or_left operator_type strategy
+            example: ct end FAD mypass G272 20150930 AMO mobile
+        **/
         return key + sep + mission + sep + message;
     }
 
