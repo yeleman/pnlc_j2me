@@ -39,7 +39,7 @@ public class TTFixeForm extends Form implements CommandListener {
     private TextField refusal_female;
     private TextField recidivism_male;
     private TextField recidivism_female;
-    private DateField operation_date;
+    private DateField dateField;
 
     Date now = new Date();
     String sep = " ";
@@ -69,10 +69,10 @@ public class TTFixeForm extends Form implements CommandListener {
         recidivism_female = new TextField(Constants.FEMALE, null, MAX_SIZE, TextField.DECIMAL);
 
         //date
-        operation_date =  new DateField("Date:", DateField.DATE, TimeZone.getTimeZone("GMT"));
-        operation_date.setDate(now);
+        dateField =  new DateField("Date:", DateField.DATE, TimeZone.getTimeZone("GMT"));
+        dateField.setDate(now);
 
-        append(operation_date);
+        append(dateField);
         append("Nb consultés");
         append(consultation_male);
         append(consultation_female);
@@ -191,7 +191,7 @@ public class TTFixeForm extends Form implements CommandListener {
         }
         // Checks Dates
         // Date d'arrivée ne peut pas être dans le future.
-        if (SharedChecks.isDateValide(operation_date.getDate()) != true) {
+        if (SharedChecks.isDateValide(dateField.getDate()) != true) {
             ErrorMessage = "[Date d'opération] " + ErrorMessage;
             return false;
         }
@@ -202,14 +202,14 @@ public class TTFixeForm extends Form implements CommandListener {
 
         String user_name = config.get("user_name");
 
-        int operation_date_array[] = SharedChecks.formatDateString(operation_date.getDate());
-        String operation_date_str = String.valueOf(operation_date_array[2])
-                             + SharedChecks.addzero(operation_date_array[1])
-                             + SharedChecks.addzero(operation_date_array[0]);
+        int date_array[] = SharedChecks.formatDateString(dateField.getDate());
+        String date_str = String.valueOf(date_array[2])
+                             + SharedChecks.addzero(date_array[1])
+                             + SharedChecks.addzero(date_array[0]);
         
-        /**SMS Text: tt visit user_name user_password village_code
+        /**SMS Text: tt fixe user_name user_password village_code
                      consultation_male consultation_female surgery_male surgery_female
-                     refusal_male refusal_female recidivism_male operation_date
+                     refusal_male refusal_female recidivism_male date
         example:tt fixe fad hdjjd G272 00 0 0 0 0 00 0 0 20151001 **/
 
         return Constants.KEY_TT + sep + "fixe"
@@ -224,16 +224,16 @@ public class TTFixeForm extends Form implements CommandListener {
                                 + sep + refusal_female.getString()
                                 + sep + recidivism_male.getString()
                                 + sep + recidivism_female.getString()
-                                + sep + operation_date_str;
+                                + sep + date_str;
     }
 
     public String toText() {
         String sep_date = "-";
-        int operation_date_array[] = SharedChecks.formatDateString(operation_date.getDate());
+        int date_array[] = SharedChecks.formatDateString(dateField.getDate());
 
-        return "[" + operation_date_array[0]  + sep_date +
-                     operation_date_array[1] + sep_date +
-                     operation_date_array[2] + "] TT fixe " + district_code ;
+        return "[" + date_array[0]  + sep_date +
+                     date_array[1] + sep_date +
+                     date_array[2] + "] TT fixe " + district_code ;
     }
 
     public void commandAction(Command c, Displayable d) {

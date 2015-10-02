@@ -44,9 +44,11 @@ public class PNLCMIDlet extends MIDlet implements CommandListener {
         config = new Configuration();
         SMSStore store = new SMSStore();
 
-        String[] mainMenu_ = {"Début Mission", "Formulaire TT", "Formulaire TT fixe",
-                              "chirurgie CAT", "Resultat CAT", "Fin Mission", "Renvoi form. (" +
-                              store.count() + ")"};
+        String[] mainMenu_ = {
+            "Début Mission", "Formulaire TT", "Formulaire TT fixe",
+            "Chirurgie CAT", "Chirurgie CAT fixe","Resultat CAT",
+            "Fin Mission", "Renvoi form. (" + store.count() + ")"
+        };
 
         if(config.get("user_name").equals("")){
             OptionForm f = new OptionForm(this);
@@ -84,31 +86,32 @@ public class PNLCMIDlet extends MIDlet implements CommandListener {
                     MissionForm mission_form = new MissionForm(this);
                     display.setCurrent (mission_form);
                     break;
-                // Mark the end of a mission
                 case 1:
                     VisitVillageForm visit_village_form = new VisitVillageForm(this);
                     display.setCurrent (visit_village_form);
                     break;
-                // submit stored messages
                 case 2:
                     TTFixeForm tt_fixe_form = new TTFixeForm(this);
                     display.setCurrent (tt_fixe_form);
                     break;
-                // submit stored messages
                 case 3:
                     VisitHealthCenterForm health_center_form = new VisitHealthCenterForm(this);
                     display.setCurrent (health_center_form);
                     break;
                 case 4:
+                    CATFixeForm cat_fixe_form = new CATFixeForm(this);
+                    display.setCurrent (cat_fixe_form);
+                    break;
+                case 5:
                     ResultForm result_form = new ResultForm(this);
                     display.setCurrent (result_form);
                     break;
-                case 5:
+                case 6:
                     this.mission = Constants.END;
                     MissionForm end_mission_form = new MissionForm(this);
                     display.setCurrent (end_mission_form);
                     break;
-                case 6:
+                case 7:
                     SendSavedReports saved_reports = new SendSavedReports(this);
                     display.setCurrent (saved_reports);
                     break;

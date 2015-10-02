@@ -43,10 +43,11 @@ public class HelpForm extends Form implements CommandListener {
                    "Un SMS non envoyé est sauvegardé dans <<Renvoi form>>.";
 
         } else if (section.equalsIgnoreCase("version")) {
-            String msg = "\n\n+ Formulaire CT \n" +
+            String msg = "\n\n+ Chirurgie CT \n" +
                          "+ Formulaire resultat CAT \n" +
                          "+ Mise à jour des entités\n" +
-                         "+ Formulaire TT fixe";
+                         "+ Formulaire TT fixe" +
+                         "+ Chirurgie CAT fixe";
             text = "PNLC - Version " + Constants.version + msg;
 
         } else if (section.equalsIgnoreCase("Mission")) {
