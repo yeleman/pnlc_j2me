@@ -69,7 +69,7 @@ public class TTFixeForm extends Form implements CommandListener {
         recidivism_female = new TextField(Constants.FEMALE, null, MAX_SIZE, TextField.DECIMAL);
 
         //date
-        operation_date =  new DateField("Date opération:", DateField.DATE, TimeZone.getTimeZone("GMT"));
+        operation_date =  new DateField("Date:", DateField.DATE, TimeZone.getTimeZone("GMT"));
         operation_date.setDate(now);
 
         append(operation_date);

@@ -44,7 +44,7 @@ public class HelpForm extends Form implements CommandListener {
 
         } else if (section.equalsIgnoreCase("version")) {
             String msg = "\n\n+ Formulaire CT \n" +
-                         "+ Formulaire resultat CAT \n+" +
+                         "+ Formulaire resultat CAT \n" +
                          "+ Mise à jour des entités\n" +
                          "+ Formulaire TT fixe";
             text = "PNLC - Version " + Constants.version + msg;

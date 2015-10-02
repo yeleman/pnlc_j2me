@@ -4,6 +4,6 @@ MIDlet-Name: PNLC
 MIDlet-Icon: eye.png
 MIDlet-Install-Notify: Merci d'avoir installer le PNLC
 MIDlet-Description: Outil de collecte du Programme Nationnal de lutte contre la Cécité
-MIDlet-Version: 1.0
+MIDlet-Version: 2.0
 MicroEdition-Configuration: CLDC-1.1
 MicroEdition-Profile: MIDP-2.0

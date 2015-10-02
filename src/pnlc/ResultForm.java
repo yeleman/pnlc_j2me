@@ -42,7 +42,7 @@ public class ResultForm extends Form implements CommandListener {
         config = new Configuration();
         store = new SMSStore();
         //date
-        result_dateField =  new DateField("Date opération:", DateField.DATE, TimeZone.getTimeZone("GMT"));
+        result_dateField =  new DateField("Date:", DateField.DATE, TimeZone.getTimeZone("GMT"));
         result_dateField.setDate(now);
         user_password = new TextField("Mot de passe:", null, 20, TextField.ANY);
         num_chirugyField = new TextField("Num. chirugie:", null, MAX_SIZE, TextField.ANY);
