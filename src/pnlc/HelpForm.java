@@ -48,7 +48,7 @@ public class HelpForm extends Form implements CommandListener {
                          "+ Mise à jour des entités\n" +
                          "+ Formulaire TT fixe" +
                          "+ Chirurgie CAT fixe";
-            text = "PNLC - Version " + Constants.version + msg;
+            text = "PNSO - Version " + Constants.version + msg;
 
         } else if (section.equalsIgnoreCase("Mission")) {
             text = "Ce formulaire permet de déclarer le début ou la fin de "+

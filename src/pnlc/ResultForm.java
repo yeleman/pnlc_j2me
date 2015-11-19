@@ -23,7 +23,7 @@ public class ResultForm extends Form implements CommandListener {
     PNLCMIDlet midlet;
     Displayable returnTo;
 
-    private static final String[] AV = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+    private static final String[] AV = {"<1", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 
     private String ErrorMessage = "";
     private static final int MAX_SIZE = 4;
@@ -35,7 +35,7 @@ public class ResultForm extends Form implements CommandListener {
     private DateField result_dateField;
 
     Date now = new Date();
-    
+
     public ResultForm(PNLCMIDlet midlet) {
         super("Result CAT");
         this.midlet = midlet;
@@ -96,7 +96,7 @@ public class ResultForm extends Form implements CommandListener {
                   + sep + str_result_date
                   + sep + num_chirugyField.getString()
                   + sep + avField.getString(avField.getSelectedIndex());
-        
+
         /** sms : cat result user_password result_date num_chirugy av
             example: cat result fad mypass 20150930 HA33 3
         **/
@@ -158,7 +158,7 @@ public class ResultForm extends Form implements CommandListener {
         int result_date_array[] = SharedChecks.formatDateString(result_dateField.getDate());
         return "[" + result_date_array[0]  + sep_date +
                      result_date_array[1] + sep_date +
-                     result_date_array[2] +"] resultat pour id : " 
+                     result_date_array[2] +"] resultat pour id : "
                    + num_chirugyField.getString();
     }
 }
