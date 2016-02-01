@@ -40,7 +40,7 @@ public class CATFixeForm extends Form implements CommandListener {
 
 
     public CATFixeForm(PNLCMIDlet midlet) {
-        super("Cataracte fixe");
+        super("Cat. fixe");
         this.midlet = midlet;
 
         config = new Configuration();
@@ -134,7 +134,7 @@ public class CATFixeForm extends Form implements CommandListener {
     public void commandAction(Command c, Displayable d) {
         // help command displays Help Form.
         if (c == CMD_HELP) {
-            HelpForm h = new HelpForm(this.midlet, this, "cataracte_fixe");
+            HelpForm h = new HelpForm(this.midlet, this, "fixe_cat");
             this.midlet.display.setCurrent(h);
         }
 

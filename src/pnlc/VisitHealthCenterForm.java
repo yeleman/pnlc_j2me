@@ -48,7 +48,7 @@ public class VisitHealthCenterForm extends Form implements CommandListener {
     
     
     public VisitHealthCenterForm(PNLCMIDlet midlet) {
-        super("Visite Aire");
+        super("Visite Aire"); //CAT
         this.midlet = midlet;
 
         config = new Configuration();

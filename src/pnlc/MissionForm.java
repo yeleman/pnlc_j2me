@@ -150,7 +150,6 @@ public class MissionForm extends Form implements CommandListener {
         if (c == CMD_EXIT) {
             this.midlet.display.setCurrent(this.midlet.mainMenu);
         }
-
         // save command
         if (c == CMD_SEND) {
             Alert alert;

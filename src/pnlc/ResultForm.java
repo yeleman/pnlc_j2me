@@ -37,7 +37,7 @@ public class ResultForm extends Form implements CommandListener {
     Date now = new Date();
 
     public ResultForm(PNLCMIDlet midlet) {
-        super("Result CAT");
+        super("Result");
         this.midlet = midlet;
         config = new Configuration();
         store = new SMSStore();

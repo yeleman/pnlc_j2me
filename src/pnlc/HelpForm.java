@@ -50,7 +50,7 @@ public class HelpForm extends Form implements CommandListener {
                          "+ Chirurgie CAT fixe";
             text = "PNSO - Version " + Constants.version + msg;
 
-        } else if (section.equalsIgnoreCase("Mission")) {
+        } else if (section.equalsIgnoreCase("mission")) {
             text = "Ce formulaire permet de déclarer le début ou la fin de "+
                    " mission tout en precisant la date et la stratégie. \n" +
                    "Car chaque rapports doit être obligatoirement lié à une mission.";
@@ -73,28 +73,33 @@ public class HelpForm extends Form implements CommandListener {
 
         } else if (section.equalsIgnoreCase("visite_health_center")) {
             text = "Renseignez les champs et envoyez.\n"+
-                   "Vous recevrez un SMS du serveur confirmant avec un Num. chirugie"+
-                   "a noté sur le formulaire CAT.";
+                   "Vous recevrez un SMS du serveur confirmant avec un Num. chirugie "+
+                   "a noté sur le formulaire CAT." +
+                   "\nNB: Le champ âge est en année et est <140";
 
         } else if (section.equalsIgnoreCase("passwd")) {
             text = "Renseignez votre ancien mot de passe dans les champs adéquat.\n" +
                    "Ensuite, indiquez le nouveau mot de passe désiré. Celui-ci doit faire au moins 3 caractères.\n" +
                    "Vous recevrez un SMS du serveur confirmant ou non le changement de mot de passe.";
 
+        } else if (section.equalsIgnoreCase("fixe_cat")){
+            text = "Renseignez les champs et envoyez.\n"+
+                   "Vous recevrez un SMS du serveur confirmant avec un Num. chirugie "+
+                   "a noté sur le formulaire." +
+                   "\nNB: Le champ âge est en année et est <140";
+        } else if (section.equalsIgnoreCase("fixe_tt")){
+            text = "Renseignez les champs et envoyez.\n" +
+                   "Vous recevrez un SMS du serveur.";
         } else {
             text = "Aucune aide disponible pour cet élément.";
-
         }
-
         helpText = new StringItem(null, text +
                                   "\n\nEn cas de problème, contactez " +
                                   Constants.HEAD_OF_MAINTENANCE + ".");
     }
-
     public void commandAction(Command c, Displayable d) {
         if (c == CMD_EXIT) {
             this.midlet.display.setCurrent(this.returnTo);
         }
     }
-
 }

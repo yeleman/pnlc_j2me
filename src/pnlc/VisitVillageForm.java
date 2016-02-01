@@ -58,7 +58,7 @@ public class VisitVillageForm extends Form implements CommandListener {
     String village_code;
 
     public VisitVillageForm(PNLCMIDlet midlet) {
-        super("Visite village");
+        super("Visite village"); //TT
         this.midlet = midlet;
 
         config = new Configuration();

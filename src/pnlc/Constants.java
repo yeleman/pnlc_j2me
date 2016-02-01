@@ -14,7 +14,7 @@ public class Constants {
 
     public static final char CLEANER = '¥';
 
-    public static final String version = "3.0";
+    public static final String version = "5.0b";
     public static final String server_number = "70062552";
     public static final String OUI = "Oui";
     public static final String NON = "Non";
@@ -33,6 +33,5 @@ public class Constants {
     public static final String KEY_CAT = "cat";
     public static final String CAT = "Cataracte";
     public static final String TT = "Trichiasis";
-
 
 }

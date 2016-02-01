@@ -17,7 +17,7 @@ import java.util.Date;
  */
 public class TTFixeForm extends Form implements CommandListener {
 
-    
+
     private static final Command CMD_EXIT = new Command ("Retour",  Command.BACK, 1);
     private static final Command CMD_SEND = new Command ("Envoi.", Command.OK, 1);
     private static final Command CMD_HELP = new Command ("Aide", Command.HELP, 2);
@@ -45,15 +45,15 @@ public class TTFixeForm extends Form implements CommandListener {
     String sep = " ";
     String region_code;
     String district_code;
-    
-    
+
+
     public TTFixeForm(PNLCMIDlet midlet) {
-        super("Fixe TT");
+        super("TT fixe");
         this.midlet = midlet;
 
         config = new Configuration();
         store = new SMSStore();
-        
+
         region_code = config.get("region_code");
         district_code = config.get("district_code");
 
@@ -95,7 +95,7 @@ public class TTFixeForm extends Form implements CommandListener {
 
     }
     public boolean isComplete(){
-        
+
         // all fields are required to be filled.
         if (user_password.getString().length() == 0 ||
             user_password.getString().length() == 0 ||
@@ -206,8 +206,8 @@ public class TTFixeForm extends Form implements CommandListener {
         String date_str = String.valueOf(date_array[2])
                              + SharedChecks.addzero(date_array[1])
                              + SharedChecks.addzero(date_array[0]);
-        
-        /**SMS Text: tt fixe user_name user_password village_code
+
+        /**SMS Text: tt fixe user_name user_password district_code
                      consultation_male consultation_female surgery_male surgery_female
                      refusal_male refusal_female recidivism_male date
         example:tt fixe fad hdjjd G272 00 0 0 0 0 00 0 0 20151001 **/
@@ -239,7 +239,7 @@ public class TTFixeForm extends Form implements CommandListener {
     public void commandAction(Command c, Displayable d) {
         // help command displays Help Form.
         if (c == CMD_HELP) {
-            HelpForm h = new HelpForm(this.midlet, this, "Trachoma_fixe");
+            HelpForm h = new HelpForm(this.midlet, this, "fixe_tt");
             this.midlet.display.setCurrent(h);
         }
 
