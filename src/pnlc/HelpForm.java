@@ -76,7 +76,7 @@ public class HelpForm extends Form implements CommandListener {
             text = "Renseignez les champs et envoyez.\n"+
                    "Vous recevrez un SMS du serveur confirmant avec un identifiant de chirugie à noter sur le formulaire CAT." +
                    "\nNB: Le champ Age est en année et est <140." +
-                   "\nLe champs Numéro désigne l'ordre d'arrivée sur le formulaire papier.";
+                   "\nLe champ Numéro désigne l'ordre d'arrivée sur le formulaire papier.";
 
         } else if (section.equalsIgnoreCase("passwd")) {
             text = "Renseignez votre ancien mot de passe dans le champ adéquat.\n" +
