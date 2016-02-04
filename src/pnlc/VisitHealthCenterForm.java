@@ -32,6 +32,7 @@ public class VisitHealthCenterForm extends Form implements CommandListener {
 
     private static final String[] EYE = {Constants.OD, Constants.OG};
     private static final String[] SEXE = {"M", "F"};
+    private TextField numField;
     private TextField user_password;
     private TextField ageField;
     private ChoiceGroup health_centerField;
@@ -60,7 +61,8 @@ public class VisitHealthCenterForm extends Form implements CommandListener {
 
         //Text
         user_password = new TextField("Mot de passe:", null, 20, TextField.ANY);
-        ageField = new TextField("Age:", null, 4, TextField.DECIMAL);
+        numField = new TextField("Numéro:", null, 3, TextField.NUMERIC);
+        ageField = new TextField("Age:", null, 4, TextField.NUMERIC);
         eyeField = new ChoiceGroup("Oeil:", ChoiceGroup.POPUP, EYE, null);
         sexField = new ChoiceGroup("Sexe:", ChoiceGroup.POPUP, SEXE, null);
 
@@ -74,6 +76,7 @@ public class VisitHealthCenterForm extends Form implements CommandListener {
 
         append(health_centerField);
         append(operation_date);
+        append(numField);
         append(sexField);
         append(eyeField);
         append(ageField);
@@ -131,8 +134,8 @@ public class VisitHealthCenterForm extends Form implements CommandListener {
                 eye = "right";
         }
         
-        /** SMS Text: ct visit user_name user_password health_center_code operation_date sex eye age
-            example: ct visit Fad mypass Z7R24 20150928 M right 55
+        /** SMS Text: cat visit user_name user_password health_center_code operation_date sex eye age
+            example: cat visit Fad mypass Z7R24 20150928 M right 55 2
         **/
         return Constants.KEY_CAT + sep + "visit"
                                  + sep + user_name.replace(' ', Constants.CLEANER)
@@ -141,7 +144,8 @@ public class VisitHealthCenterForm extends Form implements CommandListener {
                                  + sep + operation_date_str
                                  + sep + sexField.getString(sexField.getSelectedIndex())
                                  + sep + eye
-                                 + sep + ageField.getString();
+                                 + sep + ageField.getString()
+                                 + sep + numField.getString();
     }
 
     public String toText() {

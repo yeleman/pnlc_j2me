@@ -29,6 +29,7 @@ public class CATFixeForm extends Form implements CommandListener {
     private static final String[] SEXE = {"M", "F"};
     private TextField user_password;
     private TextField ageField;
+    private TextField numField;
     private ChoiceGroup health_centerField;
     private ChoiceGroup eyeField;
     private ChoiceGroup sexField;
@@ -47,15 +48,16 @@ public class CATFixeForm extends Form implements CommandListener {
         store = new SMSStore();
         district_code = config.get("district_code");
         //Text
+        numField = new TextField("Numéro:", null, 3, TextField.NUMERIC);
         user_password = new TextField("Mot de passe:", null, 20, TextField.ANY);
-        ageField = new TextField("Age:", null, 4, TextField.DECIMAL);
+        ageField = new TextField("Age:", null, 4, TextField.NUMERIC);
         eyeField = new ChoiceGroup("Oeil:", ChoiceGroup.POPUP, EYE, null);
         sexField = new ChoiceGroup("Sexe:", ChoiceGroup.POPUP, SEXE, null);
-
         //date
         dateField =  new DateField("Date:", DateField.DATE, TimeZone.getTimeZone("GMT"));
         dateField.setDate(now);
         append(dateField);
+        append(numField);
         append(sexField);
         append(eyeField);
         append(ageField);
@@ -110,7 +112,7 @@ public class CATFixeForm extends Form implements CommandListener {
         }
 
         /** SMS Text: cat fixe user_name user_password district_code operation_date sex eye age
-            example: cat fixe fad pass G272 20151002 M right 4
+            example: cat fixe fad pass G272 20151002 M right 4 23
         **/
         return Constants.KEY_CAT + sep + "fixe"
                                  + sep + user_name.replace(' ', Constants.CLEANER)
@@ -119,7 +121,8 @@ public class CATFixeForm extends Form implements CommandListener {
                                  + sep + operation_date_str
                                  + sep + sexField.getString(sexField.getSelectedIndex())
                                  + sep + eye
-                                 + sep + ageField.getString();
+                                 + sep + ageField.getString()
+                                 + sep + numField.getString();
     }
 
     public String toText() {

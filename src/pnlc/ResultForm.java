@@ -45,7 +45,7 @@ public class ResultForm extends Form implements CommandListener {
         result_dateField =  new DateField("Date:", DateField.DATE, TimeZone.getTimeZone("GMT"));
         result_dateField.setDate(now);
         user_password = new TextField("Mot de passe:", null, 20, TextField.ANY);
-        num_chirugyField = new TextField("Num. chirugie:", null, MAX_SIZE, TextField.ANY);
+        num_chirugyField = new TextField("ID chirurgie:", null, MAX_SIZE, TextField.ANY);
         avField = new ChoiceGroup("Acuité visuelle:", ChoiceGroup.POPUP, AV, null);
         append(result_dateField);
         append(num_chirugyField);

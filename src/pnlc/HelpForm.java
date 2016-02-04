@@ -43,17 +43,18 @@ public class HelpForm extends Form implements CommandListener {
                    "Un SMS non envoyé est sauvegardé dans <<Renvoi form>>.";
 
         } else if (section.equalsIgnoreCase("version")) {
-            String msg = "\n\n+ Chirurgie CT \n" +
-                         "+ Formulaire resultat CAT \n" +
+            String msg = "\n\n+ Chirurgie cataracte \n" +
+                         "+ Formulaire resultat cataracte \n" +
                          "+ Mise à jour des entités\n" +
                          "+ Formulaire TT fixe" +
-                         "+ Chirurgie CAT fixe";
+                         "+ Chirurgie cataracte fixe" +
+                         "+ Champ Némuro cataracte";
             text = "PNSO - Version " + Constants.version + msg;
 
         } else if (section.equalsIgnoreCase("mission")) {
             text = "Ce formulaire permet de déclarer le début ou la fin de "+
                    " mission tout en precisant la date et la stratégie. \n" +
-                   "Car chaque rapports doit être obligatoirement lié à une mission.";
+                   "Car chaque rapport doit être obligatoirement lié à une mission (sauf stratégie fixe).";
 
         } else if (section.equalsIgnoreCase("visite_village")) {
             text = "Renseignez les champs et envoyez.";
@@ -68,25 +69,20 @@ public class HelpForm extends Form implements CommandListener {
             text = "Vous pouvez envoyer tous les SMS à la fois ou le faire un à un.";
 
         } else if (section.equalsIgnoreCase("result")) {
-            text = "Id CT : C'est le code reçu du serveur après l'envoi d'un CAT.\n" +
-                   "Le resultat une liste 1 à 10 désignant l'acuité visuelle";
+            text = "ID chirurgie : C'est le code reçu du serveur après l'envoi d'une chirurgie.\n" +
+                   "Le resultat une liste <1 à 10 désignant l'acuité visuelle";
 
-        } else if (section.equalsIgnoreCase("visite_health_center")) {
+        } else if (section.equalsIgnoreCase("visite_health_center") || section.equalsIgnoreCase("fixe_cat")) {
             text = "Renseignez les champs et envoyez.\n"+
-                   "Vous recevrez un SMS du serveur confirmant avec un Num. chirugie "+
-                   "a noté sur le formulaire CAT." +
-                   "\nNB: Le champ âge est en année et est <140";
+                   "Vous recevrez un SMS du serveur confirmant avec un identifiant de chirugie à noter sur le formulaire CAT." +
+                   "\nNB: Le champ Age est en année et est <140." +
+                   "\nLe champs Numéro désigne l'ordre d'arrivée sur le formulaire papier.";
 
         } else if (section.equalsIgnoreCase("passwd")) {
-            text = "Renseignez votre ancien mot de passe dans les champs adéquat.\n" +
+            text = "Renseignez votre ancien mot de passe dans le champ adéquat.\n" +
                    "Ensuite, indiquez le nouveau mot de passe désiré. Celui-ci doit faire au moins 3 caractères.\n" +
                    "Vous recevrez un SMS du serveur confirmant ou non le changement de mot de passe.";
 
-        } else if (section.equalsIgnoreCase("fixe_cat")){
-            text = "Renseignez les champs et envoyez.\n"+
-                   "Vous recevrez un SMS du serveur confirmant avec un Num. chirugie "+
-                   "a noté sur le formulaire." +
-                   "\nNB: Le champ âge est en année et est <140";
         } else if (section.equalsIgnoreCase("fixe_tt")){
             text = "Renseignez les champs et envoyez.\n" +
                    "Vous recevrez un SMS du serveur.";
