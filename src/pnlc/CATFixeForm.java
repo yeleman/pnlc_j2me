@@ -26,7 +26,7 @@ public class CATFixeForm extends Form implements CommandListener {
     private SMSStore store;
 
     private static final String[] EYE = {Constants.OD, Constants.OG};
-    private static final String[] SEXE = {"M", "F"};
+    private static final String[] SEXE = {Constants.MALE, Constants.FEMALE};
     private TextField user_password;
     private TextField ageField;
     private TextField numField;
@@ -80,6 +80,9 @@ public class CATFixeForm extends Form implements CommandListener {
         if (ageField.getString().length() == 0) {
             return false;
         }
+        if (numField.getString().length() == 0) {
+            return false;
+        }
         return true;
     }
 
@@ -106,10 +109,6 @@ public class CATFixeForm extends Form implements CommandListener {
         String operation_date_str = String.valueOf(date_array[2])
                              + SharedChecks.addzero(date_array[1])
                              + SharedChecks.addzero(date_array[0]);
-        String eye = "left";
-        if (eyeField.getString(eyeField.getSelectedIndex()).equals(Constants.OD)){
-                eye = "right";
-        }
 
         /** SMS Text: cat fixe user_name user_password district_code operation_date sex eye age
             example: cat fixe fad pass G272 20151002 M right 4 23
@@ -119,8 +118,8 @@ public class CATFixeForm extends Form implements CommandListener {
                                  + sep + user_password.getString().replace(' ', Constants.CLEANER)
                                  + sep + district_code
                                  + sep + operation_date_str
-                                 + sep + sexField.getString(sexField.getSelectedIndex())
-                                 + sep + eye
+                                 + sep + Tools.getSexeValue(sexField)
+                                 + sep + Tools.getEyeValue(eyeField)
                                  + sep + ageField.getString()
                                  + sep + numField.getString();
     }

@@ -2,7 +2,7 @@ MIDlet-1: PNLCMidlet,/eye.png,pnlc.PNLCMIDlet
 MIDlet-Description: Outil de collecte du Programme Nationnal de la Santé Oculaire
 MIDlet-Icon: eye.png
 MIDlet-Install-Notify: Merci d'avoir installer l'application PNSO
-MIDlet-Jar-Size: 587427
+MIDlet-Jar-Size: 587991
 MIDlet-Jar-URL: pnlc.jar
 MIDlet-Name: PNSO
 MIDlet-Vendor: yɛlɛman s.à.r.l
