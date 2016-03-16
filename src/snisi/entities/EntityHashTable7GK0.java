@@ -19,98 +19,98 @@ public class EntityHashTable7GK0 extends EntityHashTable {
         this.children = new Vector();
 
         
-        EntityHashTable h7898 = new EntityHashTable("7898", "COMMUNE 4 CSREF");
+        EntityHashTable hZ7898 = new EntityHashTable("Z7898", "COMMUNE 4 CSREF");
 
         
 
-        this.children.addElement(h7898);
+        this.children.addElement(hZ7898);
         
-        EntityHashTable h77K6 = new EntityHashTable("77K6", "ASACODJENEKA");
+        EntityHashTable hZ77K6 = new EntityHashTable("Z77K6", "ASACODJENEKA");
 
         
         EntityHashTable v91094334 = new EntityHashTable("91094334", "KALABAMBOUGOU");
-		h77K6.children.addElement(v91094334);
+		hZ77K6.children.addElement(v91094334);
        	
 
-        this.children.addElement(h77K6);
+        this.children.addElement(hZ77K6);
         
-        EntityHashTable hHG90 = new EntityHashTable("HG90", "ASACODJIP");
+        EntityHashTable hZHG90 = new EntityHashTable("ZHG90", "ASACODJIP");
 
         
         EntityHashTable v91094001 = new EntityHashTable("91094001", "DJIKORONI-PARA");
-		hHG90.children.addElement(v91094001);
+		hZHG90.children.addElement(v91094001);
        	
 
-        this.children.addElement(hHG90);
+        this.children.addElement(hZHG90);
         
-        EntityHashTable hXCK7 = new EntityHashTable("XCK7", "ASACOHAM");
+        EntityHashTable hZXCK7 = new EntityHashTable("ZXCK7", "ASACOHAM");
 
         
         EntityHashTable v91094223 = new EntityHashTable("91094223", "HAMDALLAYE");
-		hXCK7.children.addElement(v91094223);
+		hZXCK7.children.addElement(v91094223);
        	
 
-        this.children.addElement(hXCK7);
+        this.children.addElement(hZXCK7);
         
-        EntityHashTable hA8H3 = new EntityHashTable("A8H3", "ASACOLA B5");
+        EntityHashTable hZA8H3 = new EntityHashTable("ZA8H3", "ASACOLA B5");
 
         
         EntityHashTable v91094889 = new EntityHashTable("91094889", "TALICO");
-		hA8H3.children.addElement(v91094889);
+		hZA8H3.children.addElement(v91094889);
        	
 
-        this.children.addElement(hA8H3);
+        this.children.addElement(hZA8H3);
         
-        EntityHashTable hSCX6 = new EntityHashTable("SCX6", "ASACOLA I");
+        EntityHashTable hZSCX6 = new EntityHashTable("ZSCX6", "ASACOLA I");
 
         
 
-        this.children.addElement(hSCX6);
+        this.children.addElement(hZSCX6);
         
-        EntityHashTable hRK55 = new EntityHashTable("RK55", "ASACOLA II");
+        EntityHashTable hZRK55 = new EntityHashTable("ZRK55", "ASACOLA II");
 
         
         EntityHashTable v91094445 = new EntityHashTable("91094445", "LAFIABOUGOU");
-		hRK55.children.addElement(v91094445);
+		hZRK55.children.addElement(v91094445);
        	
 
-        this.children.addElement(hRK55);
+        this.children.addElement(hZRK55);
         
-        EntityHashTable h4Y76 = new EntityHashTable("4Y76", "ASACOLABASAD");
+        EntityHashTable hZ4Y76 = new EntityHashTable("Z4Y76", "ASACOLABASAD");
 
         
         EntityHashTable v91094556 = new EntityHashTable("91094556", "LASSA");
-		h4Y76.children.addElement(v91094556);
+		hZ4Y76.children.addElement(v91094556);
        	
 
-        this.children.addElement(h4Y76);
+        this.children.addElement(hZ4Y76);
         
-        EntityHashTable h8TP6 = new EntityHashTable("8TP6", "ASACOSEK");
+        EntityHashTable hZ8TP6 = new EntityHashTable("Z8TP6", "ASACOSEK");
 
         
         EntityHashTable v91094667 = new EntityHashTable("91094667", "SEBENINKORO");
-		h8TP6.children.addElement(v91094667);
+		hZ8TP6.children.addElement(v91094667);
        	
 
-        this.children.addElement(h8TP6);
+        this.children.addElement(hZ8TP6);
         
-        EntityHashTable hF5B7 = new EntityHashTable("F5B7", "ASACOSEKASI");
+        EntityHashTable hZF5B7 = new EntityHashTable("ZF5B7", "ASACOSEKASI");
 
         
 
-        this.children.addElement(hF5B7);
+        this.children.addElement(hZF5B7);
         
-        EntityHashTable hXMS6 = new EntityHashTable("XMS6", "MATERNITÉ HAMDALLAYE");
+        EntityHashTable hZXMS6 = new EntityHashTable("ZXMS6", "MATERNITÉ HAMDALLAYE");
 
         
 
-        this.children.addElement(hXMS6);
+        this.children.addElement(hZXMS6);
         
-        EntityHashTable h8GX7 = new EntityHashTable("8GX7", "KALABANBOUGOU");
+        EntityHashTable hZ8GX7 = new EntityHashTable("Z8GX7", "KALABANBOUGOU");
 
         
 
-        this.children.addElement(h8GX7);
+        this.children.addElement(hZ8GX7);
         
     }
 

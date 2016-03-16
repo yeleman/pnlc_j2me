@@ -25,6 +25,18 @@ import snisi.entities.EntityHashTableZWT5;
 
 import snisi.entities.EntityHashTableX922;
 
+import snisi.entities.EntityHashTableR279;
+
+import snisi.entities.EntityHashTableHG51;
+
+import snisi.entities.EntityHashTableGA67;
+
+import snisi.entities.EntityHashTable7GK0;
+
+import snisi.entities.EntityHashTableXRY9;
+
+import snisi.entities.EntityHashTable5SS7;
+
 
 /**
  * List of static codes and names for Entities/Locations
@@ -68,6 +80,23 @@ public class StaticCodes {
         r4JN7.children_names.put("ZWT5", "OUELESSEBOUGOU");
         
         r4JN7.children_names.put("X922", "KALABAN KORO");
+        
+        
+        EntityHashTable r9GR8 = new EntityHashTable("9GR8", "BAMAKO");
+        root.children.addElement(r9GR8);
+
+        
+        r9GR8.children_names.put("R279", "COMMUNE1");
+        
+        r9GR8.children_names.put("HG51", "COMMUNE2");
+        
+        r9GR8.children_names.put("GA67", "COMMUNE3");
+        
+        r9GR8.children_names.put("7GK0", "COMMUNE4");
+        
+        r9GR8.children_names.put("XRY9", "COMMUNE5");
+        
+        r9GR8.children_names.put("5SS7", "COMMUNE6");
         
         
     }

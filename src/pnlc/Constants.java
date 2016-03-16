@@ -13,7 +13,7 @@ public class Constants {
     public static final int password_max_length = 8;
 
     public static final char CLEANER = '¥';
-    public static final String version = "6.0";
+    public static final String version = "7.0";
     public static final String server_number = "70062552";
     public static final String OUI = "Oui";
     public static final String NON = "Non";
